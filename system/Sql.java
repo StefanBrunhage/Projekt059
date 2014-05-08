@@ -34,7 +34,7 @@ public class Sql {
 
         try {
             //skapar uppkoppling
-            localConn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Stefan\\Dropbox\\Grupparbete TIG059\\Databas\\Databas");
+            localConn = DriverManager.getConnection("jdbc:sqlite:Databas");
         } catch (SQLException se) {
             System.out.println("Couldn't connect:"
                     + " print out a stack trace and exit.");
