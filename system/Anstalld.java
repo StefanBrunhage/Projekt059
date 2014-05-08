@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package projekt059;
+package system;
 
 import java.util.ArrayList;
 
@@ -10,8 +10,9 @@ import java.util.ArrayList;
  *
  * @author Stefan
  */
-public class Kund extends Person{
-    public Kund(int personnummer,
+public class Anstalld extends Person {
+
+    public Anstalld(int personnummer,
             String fNamn,
             String eNamn,
             String telenr,
