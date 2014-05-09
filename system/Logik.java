@@ -1,12 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package system;
+
+import java.util.ArrayList;
 
 /**
  *
- * @author lol
+ * @author Projekt059
  */
 public class Logik {
 
@@ -20,7 +18,16 @@ public class Logik {
         System.out.println(SQL);
         numberOfChanges = sql.update(SQL);
 
-
         return numberOfChanges;
     }
+
+    public ArrayList listLitt() {
+        String SQL = "SELECT * FROM litteratur";
+        ArrayList<String> resultat = new ArrayList<>();
+        System.out.println(SQL);
+        resultat = sql.query(SQL);
+
+        return resultat;
+    }
+
 }

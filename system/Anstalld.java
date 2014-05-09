@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package system;
 
 import java.util.ArrayList;
 
 /**
  *
- * @author Stefan
+ * @author Projekt059
  */
 public class Anstalld extends Person {
 

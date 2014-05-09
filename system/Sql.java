@@ -1,19 +1,19 @@
 package system;
 
 import java.sql.*;
-
+import java.util.ArrayList;
 
 /**
  *
- * @author Stefan Brunhage
+ * @author Projekt059
  */
 public class Sql {
 
     Connection c;
     Statement s;
     ResultSet rs;
-    
-    public Sql(){
+
+    public Sql() {
         c = createConnection();
         s = myCreateStatement(c);
     }
@@ -76,20 +76,19 @@ public class Sql {
      * 
      * 
      */
-    public ResultSet query(String query) {
+    public ArrayList query(String query) {
         ResultSet rs = null;
-
+        ArrayList<String> resultat = new ArrayList<>();        
         try {
-
             rs = s.executeQuery(query);
-
+            resultat = ResultSetToString(rs);
         } catch (SQLException se) {
             System.out.println("We got an exception while executing our query:"
                     + "that probably means our SQL is invalid");
             System.out.println(se.getMessage());
             System.exit(1);
         }
-        return rs;
+        return resultat;
     }
 
     /*
@@ -116,39 +115,36 @@ public class Sql {
     }
 
     /*
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    * 
-    */
-    
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     */
     //Gör resultset till en sträng
-    public String ResultSetToString(ResultSet rs) {
-        String temp;
-        String resultat = "";
+    public ArrayList ResultSetToString(ResultSet rs) {
+        String temp = "";
+        ArrayList<String> resultat = new ArrayList<>();
         try {
             ResultSetMetaData rsMetaData = rs.getMetaData();
             //forloop som tar ut columnerna från resultset och lägger in dom
             //i strängen resultat
             for (int i = 1; i <= rsMetaData.getColumnCount(); i++) {
-                resultat = resultat + rsMetaData.getColumnName(i);
+                temp = temp + " " + rsMetaData.getColumnName(i);
             }
+            resultat.add(temp);
             //while loop som lägger in alla tupler i strängen resultat 
             //om värdet av den andra columnen är null läggs 0 in i strängen
             //istället
             while (rs.next()) {
-                temp = rs.getString(2);
-                if (null == temp) {
-                    temp = "0";
-                } else {
+                temp = "";
+                for (int i = 1; i < rsMetaData.getColumnCount(); i++) {
+                    temp = temp + " " + rs.getString(i);
                 }
 
-
-                resultat = resultat + "\n " + resultat.format("%-12s\t %-11s\t",
-                        rs.getString(1), temp);
+                resultat.add(temp);
 
             }
         } catch (SQLException se) {

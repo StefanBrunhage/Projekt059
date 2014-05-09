@@ -1,20 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package system;
+
+import java.util.ArrayList;
 
 /**
  *
- * @author Stefan
+ * @author Projekt059
  */
 public class Projekt {
-    static Logik logik = new Logik();
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Litteratur l = new Litteratur(1, "asd", "d", "d", 2011, true, true, "FHRUTI487O");
-        logik.regLitt(l);
+        Logik logik = new Logik();
+        
+        Litteratur l = new Litteratur(1, "asd", "d", "d", 2011, true, true, "FHRUTI487O");        
+        //logik.regLitt(l);
+        
+        ArrayList<String> resultat = logik.listLitt();
+        for(int i = 0; i < resultat.size(); i++){
+            System.out.println(resultat.get(i));
+        }
     }
 }
