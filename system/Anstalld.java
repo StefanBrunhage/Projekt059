@@ -20,11 +20,12 @@ public class Anstalld extends Person {
         this.teleNr = teleNr;
         this.epost = epost;
         this.behorigheter = behorigheter;
+        roll = "anstalld";
     }
 
     @Override
     public String getVariableNames() {
-        return "pnr, fNamn, eNamn, teleNr, epost";
+        return "pnr, fNamn, eNamn, teleNr, epost, roll";
     }
 
     @Override

@@ -14,6 +14,7 @@ public abstract class Person {
     String teleNr;
     String epost;
     ArrayList<String> behorigheter;
+    String roll;
 
     public abstract String getVariableNames();
     

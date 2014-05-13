@@ -14,8 +14,8 @@ public class Logik {
         String insertData = litteratur.toString();
         String columnNames = litteratur.getVariableNames();
         String SQL = "INSERT INTO litteratur (" + columnNames + ") VALUES (" + insertData + ")";
+
         int numberOfChanges;
-        System.out.println(SQL);
         numberOfChanges = sql.update(SQL);
 
         return numberOfChanges;
@@ -24,7 +24,6 @@ public class Logik {
     public ArrayList listLitt() {
         String SQL = "SELECT * FROM litteratur";
         ArrayList<String> resultat = new ArrayList<>();
-        System.out.println(SQL);
         resultat = sql.query(SQL);
 
         return resultat;
@@ -32,9 +31,14 @@ public class Logik {
 
     public int regPerson(Person person) {
         String insertData = person.toString();
-        String SQL1 = "INSERT INTO person";
+        String columnNames = person.getVariableNames();
+        String SQL1 = "INSERT INTO person (" + columnNames + ") VALUES (" + insertData + ")";
         String SQL2 = "INSERT INTO personBehorighet";
-        return 0;
+
+        int numberOfChanges;
+        numberOfChanges = sql.update(SQL1);
+        numberOfChanges = numberOfChanges + sql.update(SQL2);
+        return numberOfChanges;
     }
 
 }
