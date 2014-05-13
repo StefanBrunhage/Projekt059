@@ -13,14 +13,14 @@ public class Kund extends Person {
             String eNamn,
             String teleNr,
             String epost,
-            ArrayList<String> behorigheter) {
+            ArrayList<Integer> behorigheter) {
         this.pnr = personnummer;
         this.fNamn = fNamn;
         this.eNamn = eNamn;
         this.teleNr = teleNr;
         this.epost = epost;
         this.behorigheter = behorigheter;
-        roll = "kund";
+        roll = 2; //kund
     }
 
     @Override

@@ -13,20 +13,20 @@ public abstract class Person {
     String eNamn;
     String teleNr;
     String epost;
-    ArrayList<String> behorigheter;
-    String roll;
+    ArrayList<Integer> behorigheter;
+    int roll;
 
     public abstract String getVariableNames();
-    
+
     @Override
     public abstract String toString();
-    
+
     public int getPnr() {
         return pnr;
     }
 
-    public void setPersonnummer(int personnummer) {
-        this.pnr = personnummer;
+    public void setPnr(int pnr) {
+        this.pnr = pnr;
     }
 
     public String getfNamn() {
@@ -67,5 +67,13 @@ public abstract class Person {
 
     public void setBehorigheter(ArrayList behorigheter) {
         this.behorigheter = behorigheter;
+    }
+
+    public int getRoll() {
+        return roll;
+    }
+
+    public void setRoll(int roll) {
+        this.pnr = roll;
     }
 }
