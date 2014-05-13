@@ -6,7 +6,8 @@ import java.util.ArrayList;
  *
  * @author Projekt059
  */
-public class Kund extends Person{
+public class Kund extends Person {
+
     public Kund(int personnummer,
             String fNamn,
             String eNamn,
@@ -23,6 +24,6 @@ public class Kund extends Person{
 
     @Override
     public String getVariableNames() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "pnr, fNamn, eNamn, teleNr, epost";
     }
 }

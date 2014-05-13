@@ -33,7 +33,7 @@ create table roll (
 	id integer PRIMARY KEY);
 	
 create table lon (
-	lonid integer PRIMARY KEY,
+	lonId integer PRIMARY KEY,
 	pnr integer,
 	datum varchar(10) NOT NULL,
 	FOREIGN KEY(pnr) REFERENCES person(pnr));

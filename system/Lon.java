@@ -20,6 +20,7 @@ public class Lon {
         this.slutDatum = slutDatum;
     }
 
+
     public int getLonId() {
         return lonId;
     }

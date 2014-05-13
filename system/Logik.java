@@ -12,7 +12,7 @@ public class Logik {
 
     public int regLitt(Litteratur litteratur) {
         String insertData = litteratur.toString();
-        String columnNames = Litteratur.getVariableNames();
+        String columnNames = litteratur.getVariableNames();
         String SQL = "INSERT INTO litteratur (" + columnNames + ") VALUES (" + insertData + ")";
         int numberOfChanges;
         System.out.println(SQL);

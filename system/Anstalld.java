@@ -24,6 +24,6 @@ public class Anstalld extends Person {
 
     @Override
     public String getVariableNames() {
-        return "pnr, fNamn, eNamn, teleNr"; 
+        return "pnr, fNamn, eNamn, teleNr, epost";
     }
 }
