@@ -26,4 +26,16 @@ public class Anstalld extends Person {
     public String getVariableNames() {
         return "pnr, fNamn, eNamn, teleNr, epost";
     }
+
+    @Override
+    public String toString() {
+        String anstalld;
+        anstalld = pnr + ", "
+                + "'" + fNamn + "'" + ", "
+                + "'" + eNamn + "'" + ", "
+                + "'" + teleNr + "'" + ", "
+                + "'" + epost + "'" + ", ";
+
+        return anstalld;
+    }
 }

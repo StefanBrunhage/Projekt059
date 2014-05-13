@@ -16,7 +16,10 @@ public abstract class Person {
     ArrayList<String> behorigheter;
 
     public abstract String getVariableNames();
-
+    
+    @Override
+    public abstract String toString();
+    
     public int getPnr() {
         return pnr;
     }

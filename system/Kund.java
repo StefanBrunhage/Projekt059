@@ -26,4 +26,16 @@ public class Kund extends Person {
     public String getVariableNames() {
         return "pnr, fNamn, eNamn, teleNr, epost";
     }
+
+    @Override
+    public String toString() {
+        String kund;
+        kund = pnr + ", "
+                + "'" + fNamn + "'" + ", "
+                + "'" + eNamn + "'" + ", "
+                + "'" + teleNr + "'" + ", "
+                + "'" + epost + "'" + ", ";
+
+        return kund;
+    }
 }
