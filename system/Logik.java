@@ -12,8 +12,8 @@ public class Logik {
 
     public int regLitt(Litteratur litteratur) {
         String insertData = litteratur.toString();
-        String SQL = "INSERT INTO litteratur (id, titel, forfattare, "
-                + "sprak, utgivningsar, tillganglighet, kopieringsbart, isbn) VALUES (" + insertData + ")";
+        String columnNames = Litteratur.getVariableNames();
+        String SQL = "INSERT INTO litteratur (" + columnNames + ") VALUES (" + insertData + ")";
         int numberOfChanges;
         System.out.println(SQL);
         numberOfChanges = sql.update(SQL);
@@ -28,6 +28,13 @@ public class Logik {
         resultat = sql.query(SQL);
 
         return resultat;
+    }
+
+    public int regPerson(Person person) {
+        String insertData = person.toString();
+        
+        
+        return 0;
     }
 
 }

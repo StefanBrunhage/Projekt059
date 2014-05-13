@@ -15,6 +15,11 @@ public abstract class Person {
     String epost;
     ArrayList<String> behorigheter;
 
+    public static String getVariableNames() {
+
+        return "pnr";
+    }
+
     public int getPersonnummer() {
         return personnummer;
     }
