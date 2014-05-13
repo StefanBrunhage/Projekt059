@@ -69,7 +69,7 @@ public class Litteratur {
         return sprak;
     }
 
-    public void setSprak() {
+    public void setSprak(String sprak) {
         this.sprak = sprak;
     }
 

@@ -1,7 +1,7 @@
 drop table if exists person;
 drop table if exists lon;
 drop table if exists behorighet;
-drop table if exists personbehorighet;
+drop table if exists personBehorighet;
 drop table if exists skuld;
 drop table if exists litteratur;
 drop table if exists lonlitteratur;
@@ -18,7 +18,7 @@ create table person (
 	roll integer,
 	FOREIGN KEY(roll) REFERENCES roll(id) );
 	
-create table personbehorighet (
+create table personBehorighet (
 	pnr integer,
 	behorighet integer,
 	FOREIGN KEY(pnr) REFERENCES person(pnr),

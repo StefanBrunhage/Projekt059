@@ -32,8 +32,8 @@ public class Logik {
 
     public int regPerson(Person person) {
         String insertData = person.toString();
-        
-        
+        String SQL1 = "INSERT INTO person";
+        String SQL2 = "INSERT INTO personBehorighet";
         return 0;
     }
 
