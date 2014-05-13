@@ -10,14 +10,19 @@ public class Kund extends Person{
     public Kund(int personnummer,
             String fNamn,
             String eNamn,
-            String telenr,
+            String teleNr,
             String epost,
             ArrayList<String> behorigheter) {
-        this.personnummer = personnummer;
+        this.pnr = personnummer;
         this.fNamn = fNamn;
         this.eNamn = eNamn;
-        this.telenr = telenr;
+        this.teleNr = teleNr;
         this.epost = epost;
         this.behorigheter = behorigheter;
+    }
+
+    @Override
+    public String getVariableNames() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

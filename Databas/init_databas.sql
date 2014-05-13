@@ -11,8 +11,10 @@ drop table if exists roll;
 
 create table person (
 	pnr integer PRIMARY KEY,
-	Fnamn varchar(50) NOT NULL,
-	Enamn varchar(50) NOT NULL,
+	fNamn varchar(50) NOT NULL,
+	eNamn varchar(50) NOT NULL,
+        teleNr integer NOT NULL,
+        epost varchar(60),
 	roll integer,
 	FOREIGN KEY(roll) REFERENCES roll(id) );
 	

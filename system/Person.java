@@ -8,24 +8,21 @@ import java.util.ArrayList;
  */
 public abstract class Person {
 
-    int personnummer;
+    int pnr;
     String fNamn;
     String eNamn;
-    String telenr;
+    String teleNr;
     String epost;
     ArrayList<String> behorigheter;
 
-    public static String getVariableNames() {
+    public abstract String getVariableNames();
 
-        return "pnr";
-    }
-
-    public int getPersonnummer() {
-        return personnummer;
+    public int getPnr() {
+        return pnr;
     }
 
     public void setPersonnummer(int personnummer) {
-        this.personnummer = personnummer;
+        this.pnr = personnummer;
     }
 
     public String getfNamn() {
@@ -44,12 +41,12 @@ public abstract class Person {
         this.eNamn = eNamn;
     }
 
-    public String getTelenr() {
-        return telenr;
+    public String getTeleNr() {
+        return teleNr;
     }
 
-    public void setTelenr(String telenr) {
-        this.telenr = telenr;
+    public void setTeleNr(String teleNr) {
+        this.teleNr = teleNr;
     }
 
     public String getEpost() {

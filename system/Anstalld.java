@@ -11,14 +11,19 @@ public class Anstalld extends Person {
     public Anstalld(int personnummer,
             String fNamn,
             String eNamn,
-            String telenr,
+            String teleNr,
             String epost,
             ArrayList<String> behorigheter) {
-        this.personnummer = personnummer;
+        this.pnr = personnummer;
         this.fNamn = fNamn;
         this.eNamn = eNamn;
-        this.telenr = telenr;
+        this.teleNr = teleNr;
         this.epost = epost;
         this.behorigheter = behorigheter;
+    }
+
+    @Override
+    public String getVariableNames() {
+        return "pnr, fNamn, eNamn, teleNr"; 
     }
 }
