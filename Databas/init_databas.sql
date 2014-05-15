@@ -63,4 +63,4 @@ create table lonlitteratur (
 	FOREIGN KEY(lonid) REFERENCES lon(lonid));
 	   
 	   
-
+INSERT INTO behorighet (id, namn) VALUES (1, "Kopieringsbehorighet");

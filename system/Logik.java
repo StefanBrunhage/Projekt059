@@ -28,6 +28,13 @@ public class Logik {
 
         return resultat;
     }
+        public ArrayList listPerson() {
+        String SQL = "SELECT * FROM person";
+        ArrayList<String> resultat = new ArrayList<>();
+        resultat = sql.query(SQL);
+
+        return resultat;
+    }
 
     public int regPerson(Person person) {
         String insertData = person.toString();

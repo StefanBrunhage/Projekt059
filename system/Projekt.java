@@ -21,5 +21,10 @@ public class Projekt {
         for(int i = 0; i < resultat.size(); i++){
             System.out.println(resultat.get(i));
         }
+        
+        ArrayList<Integer> b = new ArrayList<>();
+        b.add(1);
+        Kund k = new Kund(123, "Glenn", "Björk", "121212", "hej@gmail.com", b);
+        logik.regPerson(k);
     }
 }
