@@ -10,6 +10,9 @@ public class Logik {
 
     Sql sql = new Sql();
 
+    //litteratur
+    //litteratur
+    //litteratur
     public int regLitt(Litteratur litteratur) {
         String insertData = litteratur.toString();
         String columnNames = litteratur.getVariableNames();
@@ -29,6 +32,9 @@ public class Logik {
         return resultat;
     }
 
+    //person
+    //person
+    //person
     public ArrayList listPerson() {
         String SQL = "SELECT * FROM person";
         ArrayList<String> resultat = new ArrayList<>();
@@ -53,16 +59,11 @@ public class Logik {
         return numberOfChanges;
     }
 
+    //skuld
+    //skuld
+    //skuld
     public ArrayList listSkuld() {
         String SQL = "SELECT * FROM skuld";
-        ArrayList<String> resultat = new ArrayList<>();
-        resultat = sql.query(SQL);
-
-        return resultat;
-    }
-
-    public ArrayList listLon() {
-        String SQL = "SELECT * FROM lon";
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
 
@@ -77,6 +78,30 @@ public class Logik {
 
         numberOfChanges = sql.update(SQL);
         return numberOfChanges;
+    }
+
+    //lån
+    //lån
+    //lån
+    public ArrayList listLon() {
+        String SQL = "SELECT * FROM lon";
+        ArrayList<String> resultat = new ArrayList<>();
+        resultat = sql.query(SQL);
+
+        return resultat;
+    }
+    
+        public ArrayList listLonBok() {
+        String SQL = "SELECT lon.lonId,"
+                + " lon.pnr,"
+                + " lonLitteratur.titel,"
+                + " lonLitteratur.bokId FROM lon "
+                + "JOIN lonLitteratur ON lon.lonId=lonLitteratur.lonId "
+                + "JOIN litteratur ON litteratur.litterturId=lonLitteratur.lonId";
+        ArrayList<String> resultat = new ArrayList<>();
+        resultat = sql.query(SQL);
+
+        return resultat;
     }
 
     public int regLon(Lon lon) {
