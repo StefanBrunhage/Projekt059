@@ -52,4 +52,16 @@ public class Skuld {
     public void setSlutDatum(String slutDatum) {
         this.slutDatum = slutDatum;
     }
+
+    @Override
+    public String toString() {
+        String skuld;
+        skuld = skuldId + ", "
+                + "'" + belopp + "'" + ", "
+                + "'" + slutDatum + "'" + ", "
+                + "'" + lon.getLonId() + "'";
+
+        return skuld;
+
+    }
 }

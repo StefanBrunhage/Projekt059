@@ -13,7 +13,7 @@ public class Projekt {
      */
     public static void main(String[] args) {
         Logik logik = new Logik();
-        
+        /*
         Litteratur l = new Litteratur(1, "asd", "d", "d", 2011, true, true, "FHRUTI487O");        
         //logik.regLitt(l);
         
@@ -26,5 +26,11 @@ public class Projekt {
         b.add(1);
         Kund k = new Kund(123, "Glenn", "Björk", "121212", "hej@gmail.com", b);
         logik.regPerson(k);
+        */
+        System.out.println(logik.listLitt());
+        System.out.println(logik.listPerson());
+        System.out.println(logik.listSkuld());
+        System.out.println(logik.listLon());
+        
     }
 }

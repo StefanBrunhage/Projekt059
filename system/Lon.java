@@ -1,5 +1,7 @@
 package system;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Projekt059
@@ -7,11 +9,11 @@ package system;
 public class Lon {
 
     private int lonId;
-    private Litteratur litteratur;
+    private ArrayList<Litteratur> litteratur = new ArrayList<>();
     private Person person;
     private String slutDatum;
 
-    public Lon(Litteratur litteratur,
+    public Lon(ArrayList litteratur,
             Lon lon,
             Person person,
             String slutDatum) {
@@ -19,7 +21,6 @@ public class Lon {
         this.person = person;
         this.slutDatum = slutDatum;
     }
-
 
     public int getLonId() {
         return lonId;
@@ -29,11 +30,11 @@ public class Lon {
         this.lonId = lonId;
     }
 
-    public Litteratur getLitteratur() {
+    public ArrayList getLitteratur() {
         return litteratur;
     }
 
-    public void setLitteratur(Litteratur litteratur) {
+    public void setLitteratur(ArrayList litteratur) {
         this.litteratur = litteratur;
     }
 
@@ -51,5 +52,16 @@ public class Lon {
 
     public void setSlutDatum(String slutDatum) {
         this.slutDatum = slutDatum;
+    }
+
+    @Override
+    public String toString() {
+        String lon;
+        lon = lonId + ", "
+        + person.getPnr() + ", "
+        + "'" + slutDatum + "'";
+
+        return lon;
+
     }
 }
