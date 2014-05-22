@@ -47,7 +47,7 @@ create table skuld (
 	   
 create table litteratur (
     id integer PRIMARY KEY,
-    ISBN varchar(10) NOT NULL,
+    ISBN varchar(13) NOT NULL,
     titel varchar(43) NOT NULL,
     forfattare varchar(43) NOT NULL,
     sprak varchar(15) NOT NULL,

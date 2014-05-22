@@ -14,7 +14,6 @@ public class Lon {
     private String slutDatum;
 
     public Lon(ArrayList litteratur,
-            Lon lon,
             Person person,
             String slutDatum) {
         this.litteratur = litteratur;
