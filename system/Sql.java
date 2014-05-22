@@ -78,7 +78,7 @@ public class Sql {
      */
     public ArrayList query(String query) {
         ResultSet rs = null;
-        ArrayList<String> resultat = new ArrayList<>();        
+        ArrayList<String> resultat = new ArrayList<>();
         try {
             rs = s.executeQuery(query);
             resultat = ResultSetToString(rs);
@@ -129,19 +129,26 @@ public class Sql {
         ArrayList<String> resultat = new ArrayList<>();
         try {
             ResultSetMetaData rsMetaData = rs.getMetaData();
-            //forloop som tar ut columnerna från resultset och lägger in dom
-            //i strängen resultat
+
             for (int i = 1; i <= rsMetaData.getColumnCount(); i++) {
-                temp = temp + " " + rsMetaData.getColumnName(i);
+                if (i == 1) {
+                    temp = rsMetaData.getColumnName(i);
+                } else {
+                    temp = temp + " " + rsMetaData.getColumnName(i);
+                }
+
             }
             resultat.add(temp);
-            //while loop som lägger in alla tupler i strängen resultat 
-            //om värdet av den andra columnen är null läggs 0 in i strängen
-            //istället
+
             while (rs.next()) {
                 temp = "";
                 for (int i = 1; i < rsMetaData.getColumnCount(); i++) {
-                    temp = temp + " " + rs.getString(i);
+                    if (i == 1) {
+                        temp = rs.getString(i);
+                    } else {
+                        temp = temp + " " + rs.getString(i);
+                    }
+
                 }
 
                 resultat.add(temp);

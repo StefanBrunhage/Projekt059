@@ -15,7 +15,8 @@ public class Logik {
     //litteratur
     public int regLitt(Litteratur litteratur) {
         String insertData = litteratur.toString();
-        String columnNames = litteratur.getVariableNames();
+        String columnNames = "id, titel, forfattare, sprak, utgivningsar,"
+                + " tillganglig, kopieringsbart isbn";
         String SQL = "INSERT INTO litteratur (" + columnNames + ") VALUES (" + insertData + ")";
 
         int numberOfChanges;

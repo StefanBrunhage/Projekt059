@@ -35,12 +35,6 @@ public class Litteratur {
         this.isbn = isbn;
     }
     
-        public String getVariableNames(){
-    
-        return  "id, titel, forfattare, sprak, utgivningsar,"
-                + " tillganglig, kopieringsbart isbn";
-    }
-
     public int getId() {
         return id;
     }
