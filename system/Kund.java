@@ -35,7 +35,8 @@ public class Kund extends Person {
                 + "'" + fNamn + "'" + ", "
                 + "'" + eNamn + "'" + ", "
                 + "'" + teleNr + "'" + ", "
-                + "'" + epost + "'" + ", ";
+                + "'" + epost + "'" + ", "
+                + roll;
 
         return kund;
     }

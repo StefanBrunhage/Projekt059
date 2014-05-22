@@ -13,6 +13,7 @@ public class Projekt {
      */
     public static void main(String[] args) {
         Logik logik = new Logik();
+        
         /*
         Litteratur l = new Litteratur(1, "asd", "d", "d", 2011, true, true, "FHRUTI487O");        
         //logik.regLitt(l);

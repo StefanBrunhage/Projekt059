@@ -35,7 +35,8 @@ public class Anstalld extends Person {
                 + "'" + fNamn + "'" + ", "
                 + "'" + eNamn + "'" + ", "
                 + "'" + teleNr + "'" + ", "
-                + "'" + epost + "'" + ", ";
+                + "'" + epost + "'" + ", "
+                + roll;
 
         return anstalld;
     }

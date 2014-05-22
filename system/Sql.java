@@ -142,8 +142,8 @@ public class Sql {
 
             while (rs.next()) {
                 temp = "";
-                for (int i = 1; i < rsMetaData.getColumnCount(); i++) {
-                    if (i == 1) {
+                for (int i = 1; i <= rsMetaData.getColumnCount(); i++) {
+                    if (i == 1) {                       
                         temp = rs.getString(i);
                     } else {
                         temp = temp + " " + rs.getString(i);

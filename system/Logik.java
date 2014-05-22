@@ -47,7 +47,7 @@ public class Logik {
     public int regPerson(Person person) {
         String insertData = person.toString();
         String columnNames = person.getVariableNames();
-        String SQL1 = "INSERT INTO person (" + columnNames + ") VALUES (" + insertData + person.getRoll() + ")";
+        String SQL1 = "INSERT INTO person (" + columnNames + ") VALUES (" + insertData + ")";
         String SQL2;
         int numberOfChanges;
 
