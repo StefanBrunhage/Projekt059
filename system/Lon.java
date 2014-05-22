@@ -21,6 +21,16 @@ public class Lon {
         this.slutDatum = slutDatum;
     }
 
+    public Lon(int lonId,
+            ArrayList litteratur,
+            Person person,
+            String slutDatum) {
+        this.lonId = lonId;
+        this.litteratur = litteratur;
+        this.person = person;
+        this.slutDatum = slutDatum;
+    }
+
     public int getLonId() {
         return lonId;
     }
@@ -57,8 +67,8 @@ public class Lon {
     public String toString() {
         String lon;
         lon = lonId + ", "
-        + person.getPnr() + ", "
-        + "'" + slutDatum + "'";
+                + person.getPnr() + ", "
+                + "'" + slutDatum + "'";
 
         return lon;
 
