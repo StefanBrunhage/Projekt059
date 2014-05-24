@@ -42,7 +42,6 @@ public class Logik {
         return resultat;
     }
 
-
     public int delLitt(Litteratur litteratur) {
         int id = litteratur.getId();
         String SQL1 = "DELETE FROM litteratur WHERE id=" + id;
@@ -91,7 +90,7 @@ public class Logik {
     }
 
     public int delPerson(Person person) {
-        String SQL = "DELETE FROM person WHERE id=" + person.getPnr();
+        String SQL = "DELETE FROM person WHERE pnr=" + person.getPnr();
 
         int numberOfChanges;
         numberOfChanges = sql.update(SQL);
@@ -127,6 +126,15 @@ public class Logik {
         numberOfChanges = sql.update(SQL);
 
         return numberOfChanges;
+    }
+
+    public ArrayList getSkuld(Skuld skuld) {
+        int id = skuld.getSkuldId();
+        String SQL = "SELECT * FROM skuld WHERE skuldId=" + id;
+        ArrayList<String> resultat = new ArrayList<>();
+        resultat = sql.query(SQL);
+
+        return resultat;
     }
 
     //lån
@@ -177,5 +185,14 @@ public class Logik {
         numberOfChanges = sql.update(SQL);
 
         return numberOfChanges;
+    }
+    
+        public ArrayList getLon(Lon lon) {
+        int id = lon.getLonId();
+        String SQL = "SELECT * FROM lon WHERE lonId=" + id;
+        ArrayList<String> resultat = new ArrayList<>();
+        resultat = sql.query(SQL);
+
+        return resultat;
     }
 }
