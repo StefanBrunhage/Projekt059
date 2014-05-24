@@ -46,7 +46,7 @@ public class Logik {
         int id = litteratur.getId();
         String SQL1 = "DELETE FROM litteratur WHERE id=" + id;
         String SQL2 = "DELETE FROM lonLitteratur WHERE litterturId=" + id;
-        String SQL3 = "DELETE FROM "
+        String SQL3 = "DELETE FROM ";
         int numberOfChanges;
         numberOfChanges = sql.update(SQL1);
 
