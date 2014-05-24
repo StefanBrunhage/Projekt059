@@ -9,25 +9,25 @@ import java.util.ArrayList;
 public class Lon {
 
     private int lonId;
-    private ArrayList<Litteratur> litteratur = new ArrayList<>();
-    private Person person;
+    private ArrayList<Integer> litterturId = new ArrayList<>();
+    private int pnr;
     private String slutDatum;
 
-    public Lon(ArrayList litteratur,
-            Person person,
+    public Lon(ArrayList litterturId,
+            int pnr,
             String slutDatum) {
-        this.litteratur = litteratur;
-        this.person = person;
+        this.litterturId = litterturId;
+        this.pnr = pnr;
         this.slutDatum = slutDatum;
     }
 
     public Lon(int lonId,
-            ArrayList litteratur,
-            Person person,
+            ArrayList litterturId,
+            int pnr,
             String slutDatum) {
         this.lonId = lonId;
-        this.litteratur = litteratur;
-        this.person = person;
+        this.litterturId = litterturId;
+        this.pnr = pnr;
         this.slutDatum = slutDatum;
     }
 
@@ -40,19 +40,19 @@ public class Lon {
     }
 
     public ArrayList getLitteratur() {
-        return litteratur;
+        return litterturId;
     }
 
     public void setLitteratur(ArrayList litteratur) {
-        this.litteratur = litteratur;
+        this.litterturId = litteratur;
     }
 
-    public Person getPerson() {
-        return person;
+    public int getPerson() {
+        return pnr;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPerson(int pnr) {
+        this.pnr = pnr;
     }
 
     public String getSlutDatum() {
@@ -67,7 +67,7 @@ public class Lon {
     public String toString() {
         String lon;
         lon = lonId + ", "
-                + person.getPnr() + ", "
+                + pnr + ", "
                 + "'" + slutDatum + "'";
 
         return lon;

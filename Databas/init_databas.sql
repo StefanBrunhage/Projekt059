@@ -43,6 +43,8 @@ create table skuld (
     belopp integer NOT NULL,
     datum varchar(10) NOT NULL,
     lonId integer,
+    pnr integer,
+    FOREIGN KEY(pnr) REFERENCES person(pnr),
     FOREIGN KEY(lonId) REFERENCES lon(lonId));
 	   
 create table litteratur (

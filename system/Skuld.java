@@ -7,36 +7,42 @@ package system;
 public class Skuld {
 
     private int skuldId;
-    private Lon lon;
+    private int lonId;
+    private int pnr;
     private int belopp;
     private String slutDatum;
 
     public Skuld(
-            Lon lon,
+            int lonId,
             int skuldId,
             int belopp,
-            String slutDatum) {
-        this.lon = lon;
+            String slutDatum,
+            int pnr) {
+        this.lonId = lonId;
         this.belopp = belopp;
         this.slutDatum = slutDatum;
+        this.pnr = pnr;
     }
 
     public Skuld(
-            Lon lon,
+            int lonId,
             int belopp,
-            String slutDatum) {
-        this.lon = lon;
+            String slutDatum,
+            int pnr) {
+        this.lonId = lonId;
         this.belopp = belopp;
         this.slutDatum = slutDatum;
+        this.pnr = pnr;
     }
 
-    public Lon getLon() {
-        return lon;
+    public int getLonId() {
+        return lonId;
     }
 
-    public void setLon(Lon lon) {
-        this.lon = lon;
+    public void setLonId(int lonId) {
+        this.lonId = lonId;
     }
+
 
     public int getSkuldId() {
         return skuldId;
@@ -68,7 +74,8 @@ public class Skuld {
         skuld = skuldId + ", "
                 + "'" + belopp + "'" + ", "
                 + "'" + slutDatum + "'" + ", "
-                + "'" + lon.getLonId() + "'";
+                + "'" + lonId + "'" + ", "
+                + pnr;
 
         return skuld;
 

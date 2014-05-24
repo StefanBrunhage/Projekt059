@@ -33,8 +33,7 @@ public class Logik {
         return resultat;
     }
 
-    public ArrayList getLitt(Litteratur litteratur) {
-        int id = litteratur.getId();
+    public ArrayList getLitt(int id) {
         String SQL = "SELECT * FROM litteratur WHERE id=" + id;
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
@@ -42,8 +41,15 @@ public class Logik {
         return resultat;
     }
 
-    public int delLitt(Litteratur litteratur) {
-        int id = litteratur.getId();
+    public int delLitt(int littId) {
+        ArrayList<String> lon = new ArrayList<>();
+        lon = getLonLitteratur(littId);
+
+        String[] test = litt.get(1).split(" ");
+        for (int i = 0; i < test.length; i++) {
+
+        }
+
         String SQL1 = "DELETE FROM litteratur WHERE id=" + id;
         String SQL2 = "DELETE FROM lonLitteratur WHERE litterturId=" + id;
         String SQL3 = "DELETE FROM ";
@@ -64,9 +70,8 @@ public class Logik {
         return resultat;
     }
 
-    public ArrayList getPerson(Person person) {
-        int personnummer = person.getPnr();
-        String SQL = "SELECT * FROM person WHERE pnr=" + personnummer;
+    public ArrayList getPerson(int pnr) {
+        String SQL = "SELECT * FROM person WHERE pnr LIKE '%" + pnr + "%'";
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
 
@@ -89,8 +94,8 @@ public class Logik {
         return numberOfChanges;
     }
 
-    public int delPerson(Person person) {
-        String SQL = "DELETE FROM person WHERE pnr=" + person.getPnr();
+    public int delPerson(int pnr) {
+        String SQL = "DELETE FROM person WHERE pnr=" + pnr;
 
         int numberOfChanges;
         numberOfChanges = sql.update(SQL);
@@ -112,7 +117,7 @@ public class Logik {
     public int regSkuld(Skuld skuld) {
         int numberOfChanges;
         String insertData = skuld.toString();
-        String columnNames = "skuldId, belopp, datum, lonId";
+        String columnNames = "skuldId, belopp, datum, lonId, pnr";
         String SQL = "INSERT INTO person (" + columnNames + ") VALUES (" + insertData + ")";
 
         numberOfChanges = sql.update(SQL);
@@ -128,8 +133,7 @@ public class Logik {
         return numberOfChanges;
     }
 
-    public ArrayList getSkuld(Skuld skuld) {
-        int id = skuld.getSkuldId();
+    public ArrayList getSkuld(int pnr) {
         String SQL = "SELECT * FROM skuld WHERE skuldId=" + id;
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
@@ -186,10 +190,41 @@ public class Logik {
 
         return numberOfChanges;
     }
-    
-        public ArrayList getLon(Lon lon) {
-        int id = lon.getLonId();
-        String SQL = "SELECT * FROM lon WHERE lonId=" + id;
+
+    public ArrayList getLon(int lonId) {
+        String SQL = "SELECT * FROM lon WHERE lonId=" + lonId;
+        ArrayList<String> resultat = new ArrayList<>();
+        resultat = sql.query(SQL);
+
+        return resultat;
+    }
+
+    public ArrayList getLonLitteratur(int littId) {
+        String SQL = "SELECT * FROM lonLitteratur WHERE litterturId=" + littId;
+        ArrayList<String> resultat = new ArrayList<>();
+        resultat = sql.query(SQL);
+
+        return resultat;
+    }
+
+    public ArrayList getLonWithPnr(int pnr) {
+        String SQL = "SELECT * FROM lon WHERE pnr=" + pnr;
+        ArrayList<String> resultat = new ArrayList<>();
+        resultat = sql.query(SQL);
+
+        return resultat;
+    }
+
+    public ArrayList getSkuldWithLonId(int lonId) {
+        String SQL = "SELECT * FROM skuld WHERE lonId=" + lonId;
+        ArrayList<String> resultat = new ArrayList<>();
+        resultat = sql.query(SQL);
+
+        return resultat;
+    }
+
+    public ArrayList getSkuldWithPnr(int pnr) {
+        String SQL = "SELECT * FROM skuld WHERE pnr=" + pnr;
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
 
