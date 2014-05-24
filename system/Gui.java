@@ -10,11 +10,11 @@ import javax.swing.JTable;
  *
  * @author Projekt059
  */
-public class Gui extends javax.swing.JFrame {
+public class GUI extends javax.swing.JFrame {
 	
 	Logik logik = new Logik();
 	
-    public Gui() {
+    public GUI() {
         initComponents();
     }
 
@@ -329,21 +329,19 @@ public class Gui extends javax.swing.JFrame {
             	KundH_jButton_HamtaInfoActionPerformed(evt);
             	ArrayList<String> person = new ArrayList<>();
             	person = logik.listPerson();
-            	String[] personData = new String[6];
-            	String[][] getPersons = new String[100][6];
+            	String[] personData = new String[KundH_jTable_Tabell.getColumnCount()];
+            	String[][] getPersons = new String[KundH_jTable_Tabell.getRowCount()][KundH_jTable_Tabell.getColumnCount()];
             	
             	for(int i = 0; i < person.size(); i++){
             		personData = person.get(i).split(" ");
             		
-            		getPersons[i][0] = personData[0];
-            		getPersons[i][1] = personData[1];
-            		getPersons[i][2] = personData[2];
-            		getPersons[i][3] = personData[3];
-            		getPersons[i][4] = personData[4];
-            		getPersons[i][5] = personData[5];
+            		for(int x = 0; x < KundH_jTable_Tabell.getColumnCount(); x++){
+            			getPersons[i][x] = personData[x];
+            		}
             		
             		for(int x = 0; x < 6; x++){
             			KundH_jTable_Tabell.setValueAt(getPersons[i][x], i, x);
+            			
             		}
             	}
             	
@@ -438,27 +436,30 @@ public class Gui extends javax.swing.JFrame {
 
         KundH_jTextField_TeleNr.setText("TeleNr");
 
-        KundH_jButton_SokButt.setText("Sök");
+        KundH_jButton_SokButt.setText("Sök efter Personnummer");
         KundH_jButton_SokButt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 KundH_jButton_SokButtActionPerformed(evt);
+                
+                for(int i = 0; i < KundH_jTable_Tabell.getRowCount(); i++){
+                	for(int x = 0; x < KundH_jTable_Tabell.getColumnCount(); x++){
+                		KundH_jTable_Tabell.setValueAt("", i, x);
+                	}
+                }
+                
                 ArrayList<String> personData = new ArrayList<>();
-                personData = logik.listPerson();
-            	String[] personDataSplit = new String[7];
-            	String[][] getPersons = new String[100][6];
-            	ArrayList<Person> person = new ArrayList<>();
-            	//personData.size()
-            	for(int i = 0; i < 2; i++){
+                personData = logik.getPerson(Integer.parseInt(KundH_jTextField_SokField.getText()));
+            	String[] personDataSplit = new String[KundH_jTable_Tabell.getColumnCount()];
+            	String[][] getPersons = new String[KundH_jTable_Tabell.getRowCount()][KundH_jTable_Tabell.getColumnCount()];
+            	for(int i = 0; i < personData.size(); i++){
             		personDataSplit = personData.get(i).split(" ");
-            		System.out.println(personDataSplit[0]);
-            		System.out.println(personDataSplit[1]);
-            		System.out.println(personDataSplit[2]);
-            		System.out.println(personDataSplit[3]);
-            		System.out.println(personDataSplit[4]);
-            		System.out.println(personDataSplit[5]);
-            		System.out.println(personDataSplit[6]);
             		
-            		if(personDataSplit[6].equals("1")){
+            		for(int x = 0; x < KundH_jTable_Tabell.getColumnCount(); x++){
+            			getPersons[i][x] = personDataSplit[x];
+            		}
+            		
+            		for(int x = 0; x < KundH_jTable_Tabell.getColumnCount(); x++){
+            			KundH_jTable_Tabell.setValueAt(getPersons[i][x], i, x);
             			
             		}
             		
@@ -977,20 +978,14 @@ public class Gui extends javax.swing.JFrame {
             	
             	ArrayList<String> bok = new ArrayList<>();
             	bok = logik.listLitt();
-            	String[] bokData = new String[8];
-            	String[][] getBok = new String[100][8];
-            	System.out.println(bok.size());
+            	String[] bokData = new String[BokH_jTable_Tabell.getColumnCount()];
+            	String[][] getBok = new String[BokH_jTable_Tabell.getRowCount()][BokH_jTable_Tabell.getColumnCount()];
             	for(int i = 0; i < bok.size(); i++){
             		bokData = bok.get(i).split(" ");
             		
-            		getBok[i][0] = bokData[0];
-            		getBok[i][1] = bokData[1];
-            		getBok[i][2] = bokData[2];
-            		getBok[i][3] = bokData[3];
-            		getBok[i][4] = bokData[4];
-            		getBok[i][5] = bokData[5];
-            		getBok[i][6] = bokData[6];
-            		getBok[i][7] = bokData[7];
+            		for(int x = 0; x < BokH_jTable_Tabell.getColumnCount();x++){
+            			getBok[i][x] = bokData[x].replace(".", " ");
+            		}
             		
             		for(int x = 0; x < 8; x++){
             			BokH_jTable_Tabell.setValueAt(getBok[i][x], i, x);
@@ -1136,19 +1131,12 @@ public class Gui extends javax.swing.JFrame {
         BokH_jButton_Exekvera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	 BokH_jButton_ExekveraActionPerformed(evt);
-
-            	 Litteratur litteratur = new Litteratur(Integer.parseInt(BokH_jTextField_ID.getText()), BokH_jTextField_Titel.getText(), 
-            			 BokH_jTextField_Forfattare.getText(), BokH_jTextField_Sprak.getText(),
+            	 
+            	 
+            	 Litteratur litteratur = new Litteratur(Integer.parseInt(BokH_jTextField_ID.getText()), BokH_jTextField_Titel.getText().replace(" ", "."), 
+            			 BokH_jTextField_Forfattare.getText().replace(" ", "."), BokH_jTextField_Sprak.getText(),
             			 Integer.parseInt(BokH_jTextField_UtgivAr.getText()), Boolean.parseBoolean(BokH_jTextField_Tillgang.getText()),
             			 Boolean.parseBoolean(BokH_jTextField_KopB.getText()), BokH_jTextField_ISBN.getText());
-            	 System.out.println(litteratur.getId());
-            	 System.out.println(litteratur.getTitel());
-            	 System.out.println(litteratur.getForfattare());
-            	 System.out.println(litteratur.getSprak());
-            	 System.out.println(litteratur.getUtgivningsar());
-            	 System.out.println(litteratur.getTillganglig());
-            	 System.out.println(litteratur.getKopieringsbart());
-            	 System.out.println(litteratur.getISBN());
             	 
             	 logik.regLitt(litteratur);
             	 
@@ -1899,19 +1887,19 @@ public class Gui extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new Gui().setVisible(true);
+                new GUI().setVisible(true);
             }
         });
     }
@@ -2051,3 +2039,4 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JTable BokH_jTable_Tabell;
     private javax.swing.JTable SkuldH_jTable_Tabell;
 }
+
