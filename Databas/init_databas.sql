@@ -53,7 +53,8 @@ create table litteratur (
     sprak varchar(15) NOT NULL,
     utgivningsar integer NOT NULL,
     tillganglighet boolean NOT NULL,
-    kopieringsbart boolean NOT NULL);
+    kopieringsbart boolean NOT NULL,
+    SAB-klass Varchar(20);
 	   
 create table lonLitteratur (
     litterturId integer,

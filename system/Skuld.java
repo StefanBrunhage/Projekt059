@@ -21,6 +21,15 @@ public class Skuld {
         this.slutDatum = slutDatum;
     }
 
+    public Skuld(
+            Lon lon,
+            int belopp,
+            String slutDatum) {
+        this.lon = lon;
+        this.belopp = belopp;
+        this.slutDatum = slutDatum;
+    }
+
     public Lon getLon() {
         return lon;
     }
