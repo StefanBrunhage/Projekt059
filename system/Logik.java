@@ -35,23 +35,13 @@ public class Logik {
 
     public ArrayList getLitt(Litteratur litteratur) {
         int id = litteratur.getId();
-        String SQL = "SELECT * FROM litteratur WHERE ";
+        String SQL = "SELECT * FROM litteratur WHERE id=" + id;
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
 
         return resultat;
     }
 
-    public int searchLitt(Litteratur litteratur) {
-        int id = litteratur.getId();
-        String SQL1 = "DELETE FROM litteratur WHERE id=" + id;
-        String SQL2 = "DELETE FROM lonLitteratur WHERE litterturId=" + id;
-        String SQL3 = "DELETE FROM "
-        int numberOfChanges;
-        numberOfChanges = sql.update(SQL1);
-
-        return numberOfChanges;
-    }
 
     public int delLitt(Litteratur litteratur) {
         int id = litteratur.getId();
