@@ -42,21 +42,9 @@ public class Logik {
     }
 
     public int delLitt(int littId) {
-        ArrayList<String> lon = new ArrayList<>();
-        lon = getLonLitteratur(littId);
 
-        String[] test = litt.get(1).split(" ");
-        for (int i = 0; i < test.length; i++) {
 
-        }
-
-        String SQL1 = "DELETE FROM litteratur WHERE id=" + id;
-        String SQL2 = "DELETE FROM lonLitteratur WHERE litterturId=" + id;
-        String SQL3 = "DELETE FROM ";
-        int numberOfChanges;
-        numberOfChanges = sql.update(SQL1);
-
-        return numberOfChanges;
+        return 0;
     }
 
     //person
@@ -133,8 +121,8 @@ public class Logik {
         return numberOfChanges;
     }
 
-    public ArrayList getSkuld(int pnr) {
-        String SQL = "SELECT * FROM skuld WHERE skuldId=" + id;
+    public ArrayList getSkuld(int SkuldId) {
+        String SQL = "SELECT * FROM skuld WHERE skuldId=" + SkuldId;
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
 
