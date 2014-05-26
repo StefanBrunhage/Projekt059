@@ -34,7 +34,7 @@ public class Logik {
     }
 
     public ArrayList getLitt(String titel) {
-        String SQL = "SELECT * FROM litteratur WHERE titel LIKE '%" + titel+"%'";
+        String SQL = "SELECT * FROM litteratur WHERE titel LIKE '%" + titel + "%'";
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
 
@@ -99,13 +99,14 @@ public class Logik {
     public int delPerson(int pnr) {
         ArrayList<String> lonList = new ArrayList<>();
         int numberOfChanges = 0;
-
         lonList = getLonWithPnr(pnr);
+        
         for (int i = 1; i < lonList.size(); i++) {
-            Lon l = rowToLon(lonList.get(1));
+            Lon l = rowToLon(lonList.get(i));
             String SQL2 = "DELETE FROM skuld WHERE lonId=" + l.getLonId();
             numberOfChanges = numberOfChanges + sql.update(SQL2);
             String SQL3 = "DELETE FROM lon WHERE lonId=" + l.getLonId();
+            numberOfChanges = numberOfChanges + sql.update(SQL3);
         }
 
         String SQL = "DELETE FROM person WHERE pnr=" + pnr;
@@ -196,13 +197,9 @@ public class Logik {
     }
 
     public int delLon(int lonId) {
-        ArrayList<String> sl = new ArrayList<>();
-        sl = getSkuldWithLonId(lonId);
-        Skuld s = rowToSkuld(sl.get(1));
-
-        String SQL1 = "DELETE FROM lon WHERE lonId=" + lonId;
-        String SQL2 = "DELETE FROM skuld WHERE skuldId=" + s.getSkuldId();
-
+        
+        String SQL1 = "DELETE FROM skuld WHERE lonId=" + lonId;
+        String SQL2 = "DELETE FROM lon WHERE lonId=" + lonId;
 
         int numberOfChanges;
         numberOfChanges = sql.update(SQL1);
@@ -231,7 +228,7 @@ public class Logik {
         String SQL = "SELECT lonId FROM lonLitteratur WHERE litterturId=" + littId;
         ArrayList<String> lonIdList = new ArrayList<>();
         lonIdList = sql.query(SQL);
-        
+
         ArrayList<String> lonList = new ArrayList<>();
         for (int i = 1; i < lonIdList.size(); i++) {
             int lonId = Integer.parseInt(lonIdList.get(i));
