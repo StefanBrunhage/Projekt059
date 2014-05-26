@@ -1,4 +1,4 @@
-package system;
+package System;
 
 import java.sql.*;
 import java.util.ArrayList;
