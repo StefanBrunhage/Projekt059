@@ -100,7 +100,7 @@ public class Logik {
         ArrayList<String> lonList = new ArrayList<>();
         int numberOfChanges = 0;
         lonList = getLonWithPnr(pnr);
-        
+
         for (int i = 1; i < lonList.size(); i++) {
             Lon l = rowToLon(lonList.get(i));
             String SQL2 = "DELETE FROM skuld WHERE lonId=" + l.getLonId();
@@ -197,13 +197,15 @@ public class Logik {
     }
 
     public int delLon(int lonId) {
-        
+
         String SQL1 = "DELETE FROM skuld WHERE lonId=" + lonId;
         String SQL2 = "DELETE FROM lon WHERE lonId=" + lonId;
+        String SQL3 = "DELETE FROM lonLitteratur WHERE lonId=" + lonId;
 
         int numberOfChanges;
         numberOfChanges = sql.update(SQL1);
         numberOfChanges = numberOfChanges + sql.update(SQL2);
+        numberOfChanges = numberOfChanges + sql.update(SQL3);
 
         return numberOfChanges;
     }
