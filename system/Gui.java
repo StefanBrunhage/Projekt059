@@ -1,4 +1,4 @@
-package System;
+package system;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -310,13 +310,19 @@ public class Gui extends javax.swing.JFrame {
         jLabel17.setText("Radera Kund efter ID");
 
         KundH_jTextField_RaderaK.setText("Skriv in ID");
-        KundH_jTextField_RaderaK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                KundH_jTextField_RaderaKActionPerformed(evt);
-            }
-        });
+
 
         KundH_jButton_RaderaK.setText("Ta bort");
+        
+        KundH_jButton_RaderaK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	KundH_jButton_RaderaKActionPerformed(evt);
+            	
+            	int pnr = Integer.parseInt(KundH_jTextField_RaderaK.getText());
+            	logik.delPerson(pnr);
+            	KundH_jTextField_RaderaK.setText("");
+            }
+        });
 
         jLabel18.setText("Hämta information");
 
@@ -1157,15 +1163,21 @@ public class Gui extends javax.swing.JFrame {
         BokHButtonGroup.add( BokH_jRadioButton_Edit);
 
         BokH_jTextField_RaderaLitt.setText("Skriv in ID");
-        BokH_jTextField_RaderaLitt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BokH_jTextField_RaderaLittActionPerformed(evt);
-            }
-        });
+
 
         jLabel1.setText("Radera Litteratur efter ID");
 
         BokH_jButton_RaderaLitt.setText("Ta bort");
+        
+        BokH_jButton_RaderaLitt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	BokH_jButton_RaderaLittActionPerformed(evt);
+            	
+            	int bokId = Integer.parseInt(BokH_jTextField_RaderaLitt.getText());
+            	logik.delLitt(bokId);
+            	BokH_jTextField_RaderaLitt.setText("");
+            }
+        });
 
         jLabel2.setText("Sortera information");
 
@@ -1220,6 +1232,31 @@ public class Gui extends javax.swing.JFrame {
         BokH_jButton_SokButt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BokH_jButton_SokButtActionPerformed(evt);
+                
+                for(int i = 0; i < BokH_jTable_Tabell.getRowCount(); i++){
+                	for(int x = 0; x < BokH_jTable_Tabell.getColumnCount(); x++){
+                		BokH_jTable_Tabell.setValueAt("", i, x);
+                	}
+                }
+                
+                ArrayList<String> bokData = new ArrayList<>();
+                bokData = logik.getLitt(BokH_jTextField_SokField.getText().replace(" ", "."));
+            	String[] bokDataSplit = new String[BokH_jTable_Tabell.getColumnCount()];
+            	String[][] getPersons = new String[BokH_jTable_Tabell.getRowCount()][BokH_jTable_Tabell.getColumnCount()];
+            	for(int i = 0; i < bokData.size(); i++){
+            		bokDataSplit = bokData.get(i).split(" ");
+            		
+            		for(int x = 0; x < BokH_jTable_Tabell.getColumnCount(); x++){
+            			getPersons[i][x] = bokDataSplit[x].replace(".", " ");
+            		}
+            		
+            		for(int x = 0; x < BokH_jTable_Tabell.getColumnCount(); x++){
+            			BokH_jTable_Tabell.setValueAt(getPersons[i][x], i, x);
+            			
+            		}
+            		
+            	}
+                
             }
         });
 
@@ -1808,7 +1845,7 @@ public class Gui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BokH_jButton_RensActionPerformed
 
-    private void BokH_jTextField_RaderaLittActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BokH_jTextField_RaderaLittActionPerformed
+    private void BokH_jButton_RaderaLittActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BokH_jTextField_RaderaLittActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BokH_jTextField_RaderaLittActionPerformed
 
@@ -1836,7 +1873,7 @@ public class Gui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_KundH_jRadioButton_AddActionPerformed
 
-    private void KundH_jTextField_RaderaKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KundH_jTextField_RaderaKActionPerformed
+    private void KundH_jButton_RaderaKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KundH_jTextField_RaderaKActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_KundH_jTextField_RaderaKActionPerformed
 
@@ -2039,4 +2076,3 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JTable BokH_jTable_Tabell;
     private javax.swing.JTable SkuldH_jTable_Tabell;
 }
-
