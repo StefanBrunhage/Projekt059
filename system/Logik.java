@@ -146,10 +146,10 @@ public class Logik {
     public ArrayList listLonBok() {
         String SQL = "SELECT lon.lonId,"
                 + " lon.pnr,"
-                + " lonLitteratur.titel,"
-                + " lonLitteratur.bokId FROM lon "
+                + " litteratur.titel,"
+                + " litteratur.id AS litteraturId FROM lon "
                 + "JOIN lonLitteratur ON lon.lonId=lonLitteratur.lonId "
-                + "JOIN litteratur ON litteratur.litterturId=lonLitteratur.lonId";
+                + "JOIN litteratur ON litteratur.id=lonLitteratur.lonId";
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
 
