@@ -45,7 +45,7 @@ public class Logik {
         ArrayList<String> lonList = new ArrayList<>();
         int numberOfChanges = 0;
 
-        lonList = getLonWithPnr(pnr);
+        lonList = getLonWithLittId(littId);
         for (int i = 1; 1 < lonList.size(); i++) {
             Lon l = rowToLon(lonList.get(1));
             String SQL2 = "DELETE FROM skuld WHERE lonId=" + l.getLonId();
