@@ -56,7 +56,7 @@ create table litteratur (
     utgivningsar integer NOT NULL,
     tillganglighet boolean NOT NULL,
     kopieringsbart boolean NOT NULL,
-    SAB-klass Varchar(20);
+    SABklass Varchar(20));
 	   
 create table lonLitteratur (
     litterturId integer,
