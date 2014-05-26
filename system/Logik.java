@@ -42,10 +42,21 @@ public class Logik {
     }
 
     public int delLitt(int littId) {
-        String SQL = "DELETE FROM litteratur WHERE id =" + littId;
+        ArrayList<String> lonList = new ArrayList<>();
+        int numberOfChanges = 0;
 
-        int numberOfChanges;
-        numberOfChanges = sql.update(SQL);
+        lonList = getLonWithPnr(pnr);
+        for (int i = 1; 1 < lonList.size(); i++) {
+            Lon l = rowToLon(lonList.get(1));
+            String SQL2 = "DELETE FROM skuld WHERE lonId=" + l.getLonId();
+            numberOfChanges = numberOfChanges + sql.update(SQL2);
+            String SQL3 = "DELETE FROM lon WHERE lonId=" + l.getLonId();
+        }
+
+        String SQL = "DELETE FROM litteratur WHERE lonId=" + littId;
+
+
+        numberOfChanges = numberOfChanges + sql.update(SQL);
 
         return numberOfChanges;
     }
@@ -86,10 +97,21 @@ public class Logik {
     }
 
     public int delPerson(int pnr) {
+        ArrayList<String> lonList = new ArrayList<>();
+        int numberOfChanges = 0;
+
+        lonList = getLonWithPnr(pnr);
+        for (int i = 1; 1 < lonList.size(); i++) {
+            Lon l = rowToLon(lonList.get(1));
+            String SQL2 = "DELETE FROM skuld WHERE lonId=" + l.getLonId();
+            numberOfChanges = numberOfChanges + sql.update(SQL2);
+            String SQL3 = "DELETE FROM lon WHERE lonId=" + l.getLonId();
+        }
+
         String SQL = "DELETE FROM person WHERE pnr=" + pnr;
 
-        int numberOfChanges;
-        numberOfChanges = sql.update(SQL);
+
+        numberOfChanges = numberOfChanges + sql.update(SQL);
 
         return numberOfChanges;
     }
@@ -203,6 +225,20 @@ public class Logik {
         resultat = sql.query(SQL);
 
         return resultat;
+    }
+
+    public ArrayList getLonWithLittId(int littId) {
+        String SQL = "SELECT lonId FROM lonLitteratur WHERE litterturId=" + littId;
+        ArrayList<String> lonIdList = new ArrayList<>();
+        lonIdList = sql.query(SQL);
+        
+        ArrayList<String> lonList = new ArrayList<>();
+        for (int i = 1; i < lonIdList.size(); i++) {
+            int lonId = Integer.parseInt(lonIdList.get(i));
+            getLon(lonId).get(1);
+        }
+
+        return lonList;
     }
 
     public ArrayList getLonWithPnr(int pnr) {
