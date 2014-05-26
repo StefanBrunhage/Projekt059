@@ -14,6 +14,7 @@ public class Litteratur {
     private boolean tillganglig;
     private boolean kopieringsbart;
     private String isbn;
+    //private String sabKlass;
 
     public Litteratur(
             int id,
@@ -23,7 +24,9 @@ public class Litteratur {
             int utgivningsar,
             boolean tillganglig,
             boolean kopieringsbart,
-            String isbn) {
+            String isbn//,
+            //String sabKlass
+            ) {
 
         this.id = id;
         this.titel = titel;
@@ -33,6 +36,7 @@ public class Litteratur {
         this.tillganglig = tillganglig;
         this.kopieringsbart = kopieringsbart;
         this.isbn = isbn;
+        //this.sabKlass = sabKlass;
     }
     
     public int getId() {
@@ -111,7 +115,8 @@ public class Litteratur {
                 + utgivningsar + ", "
                 + "'" + tillganglig + "'" + ", "
                 + "'" + kopieringsbart + "'" + ", "
-                + "'" + isbn + "'";
+                + "'" + isbn + "'";// + ", "
+                //+ "'" + sabKlass;
 
 
 

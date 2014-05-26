@@ -16,7 +16,7 @@ public class Logik {
     public int regLitt(Litteratur litteratur) {
         String insertData = litteratur.toString();
         String columnNames = "id, titel, forfattare, sprak, utgivningsar,"
-                + " tillganglig, kopieringsbart, isbn";
+                + " tillganglig, kopieringsbart, isbn, SAB-klass";
         String SQL = "INSERT INTO litteratur (" + columnNames + ") VALUES (" + insertData + ")";
 
         int numberOfChanges;
@@ -42,9 +42,12 @@ public class Logik {
     }
 
     public int delLitt(int littId) {
+        String SQL = "DELETE FROM litteratur WHERE id =" + littId;
 
+        int numberOfChanges;
+        numberOfChanges = sql.update(SQL);
 
-        return 0;
+        return numberOfChanges;
     }
 
     //person
@@ -112,8 +115,8 @@ public class Logik {
         return numberOfChanges;
     }
 
-    public int delSkuld(Skuld skuld) {
-        String SQL = "DELETE FROM skuld WHERE skuldId=" + skuld.getSkuldId();
+    public int delSkuld(int skuldId) {
+        String SQL = "DELETE FROM skuld WHERE skuldId=" + skuldId;
 
         int numberOfChanges;
         numberOfChanges = sql.update(SQL);
@@ -162,16 +165,16 @@ public class Logik {
         int numberOfChanges;
 
         numberOfChanges = sql.update(SQL1);
-        for (int i = 0; i < lon.getLitteratur().size(); i++) {
-            SQL2 = "INSERT INTO lonLitteratur (litterturId, lonId) VALUES (" + lon.getLitteratur().get(i) + ", " + lon.getLonId() + ")";
+        for (int i = 0; i < lon.getlitterturId().size(); i++) {
+            SQL2 = "INSERT INTO lonLitteratur (litterturId, lonId) VALUES (" + lon.getlitterturId().get(i) + ", " + lon.getLonId() + ")";
             numberOfChanges = numberOfChanges + sql.update(SQL2);
         }
 
         return numberOfChanges;
     }
 
-    public int delLon(Lon lon) {
-        String SQL = "DELETE FROM lon WHERE lonId=" + lon.getLonId();
+    public int delLon(int lonId) {
+        String SQL = "DELETE FROM lon WHERE lonId=" + lonId;
 
         int numberOfChanges;
         numberOfChanges = sql.update(SQL);

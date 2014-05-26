@@ -39,11 +39,11 @@ public class Lon {
         this.lonId = lonId;
     }
 
-    public ArrayList getLitteratur() {
+    public ArrayList getlitterturId() {
         return litterturId;
     }
 
-    public void setLitteratur(ArrayList litteratur) {
+    public void setlitterturId(ArrayList litteratur) {
         this.litterturId = litteratur;
     }
 
