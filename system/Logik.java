@@ -101,7 +101,7 @@ public class Logik {
         int numberOfChanges = 0;
 
         lonList = getLonWithPnr(pnr);
-        for (int i = 1; 1 < lonList.size(); i++) {
+        for (int i = 1; i < lonList.size(); i++) {
             Lon l = rowToLon(lonList.get(1));
             String SQL2 = "DELETE FROM skuld WHERE lonId=" + l.getLonId();
             numberOfChanges = numberOfChanges + sql.update(SQL2);
