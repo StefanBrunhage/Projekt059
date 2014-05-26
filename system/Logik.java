@@ -16,7 +16,7 @@ public class Logik {
     public int regLitt(Litteratur litteratur) {
         String insertData = litteratur.toString();
         String columnNames = "id, titel, forfattare, sprak, utgivningsar,"
-                + " tillganglig, kopieringsbart, isbn, SAB-klass";
+                + " tillganglighet, kopieringsbart, isbn";
         String SQL = "INSERT INTO litteratur (" + columnNames + ") VALUES (" + insertData + ")";
 
         int numberOfChanges;
@@ -174,10 +174,17 @@ public class Logik {
     }
 
     public int delLon(int lonId) {
-        String SQL = "DELETE FROM lon WHERE lonId=" + lonId;
+        ArrayList<String> sl = new ArrayList<>();
+        sl = getSkuldWithLonId(lonId);
+        Skuld s = rowToSkuld(sl.get(1));
+
+        String SQL1 = "DELETE FROM lon WHERE lonId=" + lonId;
+        String SQL2 = "DELETE FROM skuld WHERE skuldId=" + s.getSkuldId();
+
 
         int numberOfChanges;
-        numberOfChanges = sql.update(SQL);
+        numberOfChanges = sql.update(SQL1);
+        numberOfChanges = numberOfChanges + sql.update(SQL2);
 
         return numberOfChanges;
     }
@@ -220,5 +227,85 @@ public class Logik {
         resultat = sql.query(SQL);
 
         return resultat;
+    }
+
+    //text strängar till olika objekt
+    public Person rowToPerson(String row) {
+        String[] rowArray;
+        rowArray = row.split(" ");
+        int pnr = Integer.parseInt(rowArray[0]);
+        String eNamn = rowArray[1];
+        String fNamn = rowArray[2];
+        String teleNr = rowArray[3];
+        String epost = rowArray[4];
+        int roll = Integer.parseInt(rowArray[5]);
+        if (roll == 1) {
+            Anstalld a = new Anstalld(pnr,
+                    eNamn,
+                    fNamn,
+                    teleNr,
+                    epost);
+            return a;
+
+        } else {
+            Kund k = new Kund(pnr,
+                    fNamn,
+                    eNamn,
+                    teleNr,
+                    epost);
+            return k;
+        }
+    }
+
+    public Skuld rowToSkuld(String row) {
+        String[] rowArray;
+        rowArray = row.split(" ");
+        int skuldId = Integer.parseInt(rowArray[0]);
+        int lonId = Integer.parseInt(rowArray[1]);
+        int pnr = Integer.parseInt(rowArray[2]);
+        int belopp = Integer.parseInt(rowArray[3]);
+        String slutDatum = rowArray[4];
+        Skuld s = new Skuld(
+                skuldId,
+                lonId,
+                belopp,
+                slutDatum,
+                pnr);
+        return s;
+    }
+
+    public Lon rowToLon(String row) {
+        String[] rowArray;
+        rowArray = row.split(" ");
+        int lonId = Integer.parseInt(rowArray[0]);
+        int pnr = Integer.parseInt(rowArray[1]);
+        String slutDatum = rowArray[2];
+        Lon l = new Lon(
+                lonId,
+                pnr,
+                slutDatum);
+        return l;
+    }
+
+    public Litteratur rowToLitt(String row) {
+        String[] rowArray;
+        rowArray = row.split(" ");
+        int id = Integer.parseInt(rowArray[0]);
+        String titel = rowArray[1];
+        String forfattare = rowArray[2];
+        String sprak = rowArray[3];
+        int utgivningsar = Integer.parseInt(rowArray[4]);
+        boolean tillganglig = Boolean.parseBoolean(rowArray[5]);
+        boolean kopieringsbart = Boolean.parseBoolean(rowArray[6]);
+        String isbn = rowArray[7];
+        Litteratur l = new Litteratur(id,
+                titel,
+                forfattare,
+                sprak,
+                utgivningsar,
+                tillganglig,
+                kopieringsbart,
+                isbn);
+        return l;
     }
 }

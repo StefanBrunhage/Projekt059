@@ -8,18 +8,30 @@ import java.util.ArrayList;
  */
 public class Kund extends Person {
 
-    public Kund(int personnummer,
+    public Kund(int pnr,
             String fNamn,
             String eNamn,
             String teleNr,
             String epost,
             ArrayList<Integer> behorigheter) {
-        this.pnr = personnummer;
+        this.pnr = pnr;
         this.fNamn = fNamn;
         this.eNamn = eNamn;
         this.teleNr = teleNr;
         this.epost = epost;
         this.behorigheter = behorigheter;
+        roll = 2; //kund
+    }
+        public Kund(int pnr,
+            String fNamn,
+            String eNamn,
+            String teleNr,
+            String epost) {
+        this.pnr = pnr;
+        this.fNamn = fNamn;
+        this.eNamn = eNamn;
+        this.teleNr = teleNr;
+        this.epost = epost;
         roll = 2; //kund
     }
 

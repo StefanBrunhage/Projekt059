@@ -8,18 +8,31 @@ import java.util.ArrayList;
  */
 public class Anstalld extends Person {
 
-    public Anstalld(int personnummer,
+    public Anstalld(int pnr,
             String fNamn,
             String eNamn,
             String teleNr,
             String epost,
             ArrayList<Integer> behorigheter) {
-        this.pnr = personnummer;
+        this.pnr = pnr;
         this.fNamn = fNamn;
         this.eNamn = eNamn;
         this.teleNr = teleNr;
         this.epost = epost;
         this.behorigheter = behorigheter;
+        roll = 1; //anställd
+    }
+
+    public Anstalld(int pnr,
+            String fNamn,
+            String eNamn,
+            String teleNr,
+            String epost) {
+        this.pnr = pnr;
+        this.fNamn = fNamn;
+        this.eNamn = eNamn;
+        this.teleNr = teleNr;
+        this.epost = epost;
         roll = 1; //anställd
     }
 

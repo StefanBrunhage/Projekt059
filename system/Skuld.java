@@ -13,8 +13,8 @@ public class Skuld {
     private String slutDatum;
 
     public Skuld(
-            int lonId,
             int skuldId,
+            int lonId,
             int belopp,
             String slutDatum,
             int pnr) {
@@ -42,7 +42,6 @@ public class Skuld {
     public void setLonId(int lonId) {
         this.lonId = lonId;
     }
-
 
     public int getSkuldId() {
         return skuldId;

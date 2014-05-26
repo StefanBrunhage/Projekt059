@@ -31,6 +31,14 @@ public class Lon {
         this.slutDatum = slutDatum;
     }
 
+    public Lon(int lonId,
+            int pnr,
+            String slutDatum) {
+        this.lonId = lonId;
+        this.pnr = pnr;
+        this.slutDatum = slutDatum;
+    }
+
     public int getLonId() {
         return lonId;
     }
