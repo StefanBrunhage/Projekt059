@@ -33,8 +33,8 @@ public class Logik {
         return resultat;
     }
 
-    public ArrayList getLitt(int id) {
-        String SQL = "SELECT * FROM litteratur WHERE id=" + id;
+    public ArrayList getLitt(String titel) {
+        String SQL = "SELECT * FROM litteratur WHERE titel LIKE '%" + titel+"%'";
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
 
