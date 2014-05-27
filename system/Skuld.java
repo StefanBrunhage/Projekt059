@@ -18,6 +18,7 @@ public class Skuld {
             int belopp,
             String slutDatum,
             int pnr) {
+        this.skuldId = skuldId;
         this.lonId = lonId;
         this.belopp = belopp;
         this.slutDatum = slutDatum;
