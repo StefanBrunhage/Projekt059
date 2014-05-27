@@ -28,7 +28,6 @@ public class Sql {
         } catch (ClassNotFoundException cnfe) {
             System.err.println("Couldn't find driver class:");
             cnfe.printStackTrace();
-            System.exit(1);
         }
         System.out.println("Driver found");
 
@@ -39,7 +38,7 @@ public class Sql {
             System.out.println("Couldn't connect:"
                     + " print out a stack trace and exit.");
             se.printStackTrace();
-            System.exit(1);
+
         }
         //om allt gick som det ska
         if (localConn != null) {
@@ -62,7 +61,7 @@ public class Sql {
             System.out.println("We got an exception while creating a statement:"
                     + "that probably means we're no longer connected.");
             System.out.println(se.getMessage());
-            System.exit(1);
+
         }
         return s;
     }
@@ -86,7 +85,7 @@ public class Sql {
             System.out.println("We got an exception while executing our query:"
                     + "that probably means our SQL is invalid");
             System.out.println(se.getMessage());
-            System.exit(1);
+
         }
         return resultat;
     }
@@ -109,7 +108,7 @@ public class Sql {
             System.out.println("We got an exception while executing our query: "
                     + "that probably means our SQL is invalid");
             System.out.println(se.getMessage());
-            System.exit(1);
+
         }
         return antal;
     }
@@ -143,7 +142,7 @@ public class Sql {
             while (rs.next()) {
                 temp = "";
                 for (int i = 1; i <= rsMetaData.getColumnCount(); i++) {
-                    if (i == 1) {                       
+                    if (i == 1) {
                         temp = rs.getString(i);
                     } else {
                         temp = temp + " " + rs.getString(i);
@@ -158,7 +157,7 @@ public class Sql {
             System.out.println("We got an exception while getting a result:this"
                     + " shouldn't happen: we've done something really bad.");
             System.out.println(se.getMessage());
-            System.exit(1);
+
         }
         return resultat;
     }
