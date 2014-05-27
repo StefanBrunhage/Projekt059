@@ -71,9 +71,9 @@ public class Skuld {
     public String toString() {
         String skuld;
         skuld = skuldId + ", "
-                +  belopp + ", "
+                + belopp + ", "
                 + "'" + slutDatum + "'" + ", "
-                + "'" + lonId + "'" + ", "
+                + lonId + ", "
                 + pnr;
 
         return skuld;
