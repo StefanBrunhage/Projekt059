@@ -1,19 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package system;
 
 /**
  *
- * @author UnknownFate
+ * @author Projekt059
  */
 public class ObjektSkapare {
 
-    //text strängar till olika objekt
-    //text strängar till olika objekt
-    //text strängar till olika objekt
+    
     public static Person rowToPerson(String row) {
         String[] rowArray;
         rowArray = row.split(" ");

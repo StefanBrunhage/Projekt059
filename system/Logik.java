@@ -161,7 +161,7 @@ public class Logik {
         int numberOfChanges;
         String insertData = skuld.toString();
         String columnNames = "skuldId, belopp, datum, lonId, pnr";
-        String SQL = "INSERT INTO person (" + columnNames + ") VALUES (" + insertData + ")";
+        String SQL = "INSERT INTO skuld (" + columnNames + ") VALUES (" + insertData + ")";
 
         numberOfChanges = sql.update(SQL);
         return numberOfChanges;
