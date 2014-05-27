@@ -3,28 +3,15 @@ package system;
 import java.util.ArrayList;
 
 /**
-*
-* @author Projekt059
-*/
+ *
+ * @author Projekt059
+ */
 public class Logik {
 
     Sql sql = new Sql();
-
     //litteratur
     //litteratur
     //litteratur
-    public int regLitt(Litteratur litteratur) {
-        String insertData = litteratur.toString();
-        String columnNames = "id, titel, forfattare, sprak, utgivningsar,"
-                + " tillganglighet, kopieringsbart, isbn";
-        String SQL = "INSERT INTO litteratur (" + columnNames + ") VALUES (" + insertData + ")";
-
-        int numberOfChanges;
-        numberOfChanges = sql.update(SQL);
-
-        return numberOfChanges;
-    }
-
     public ArrayList listLitt() {
         String SQL = "SELECT * FROM litteratur";
         ArrayList<String> resultat = new ArrayList<>();
@@ -32,9 +19,9 @@ public class Logik {
 
         return resultat;
     }
-    
+
     public ArrayList getLittId(int id) {
-        String SQL = "SELECT * FROM litteratur WHERE id == "+ id;
+        String SQL = "SELECT * FROM litteratur WHERE id == " + id;
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
 
@@ -49,20 +36,31 @@ public class Logik {
         return resultat;
     }
 
+    public int regLitt(Litteratur litteratur) {
+        String insertData = litteratur.toString();
+        String columnNames = "id, titel, forfattare, sprak, utgivningsar,"
+                + " tillganglighet, kopieringsbart, isbn";
+        String SQL = "INSERT INTO litteratur (" + columnNames + ") VALUES (" + insertData + ")";
+
+        int numberOfChanges;
+        numberOfChanges = sql.update(SQL);
+
+        return numberOfChanges;
+    }
+
     public int delLitt(int littId) {
         ArrayList<String> lonList = new ArrayList<>();
         int numberOfChanges = 0;
 
         lonList = getLonWithLittId(littId);
         for (int i = 1; 1 < lonList.size(); i++) {
-            Lon l = rowToLon(lonList.get(1));
+            Lon l = ObjektSkapare.rowToLon(lonList.get(1));
             String SQL2 = "DELETE FROM skuld WHERE lonId=" + l.getLonId();
             numberOfChanges = numberOfChanges + sql.update(SQL2);
             String SQL3 = "DELETE FROM lon WHERE lonId=" + l.getLonId();
         }
 
         String SQL = "DELETE FROM litteratur WHERE lonId=" + littId;
-
 
         numberOfChanges = numberOfChanges + sql.update(SQL);
 
@@ -110,7 +108,7 @@ public class Logik {
         lonList = getLonWithPnr(pnr);
 
         for (int i = 1; i < lonList.size(); i++) {
-            Lon l = rowToLon(lonList.get(i));
+            Lon l = ObjektSkapare.rowToLon(lonList.get(i));
             String SQL2 = "DELETE FROM skuld WHERE lonId=" + l.getLonId();
             numberOfChanges = numberOfChanges + sql.update(SQL2);
             String SQL3 = "DELETE FROM lon WHERE lonId=" + l.getLonId();
@@ -118,7 +116,6 @@ public class Logik {
         }
 
         String SQL = "DELETE FROM person WHERE pnr=" + pnr;
-
 
         numberOfChanges = numberOfChanges + sql.update(SQL);
 
@@ -130,6 +127,30 @@ public class Logik {
     //skuld
     public ArrayList listSkuld() {
         String SQL = "SELECT * FROM skuld";
+        ArrayList<String> resultat = new ArrayList<>();
+        resultat = sql.query(SQL);
+
+        return resultat;
+    }
+
+    public ArrayList getSkuld(int SkuldId) {
+        String SQL = "SELECT * FROM skuld WHERE skuldId=" + SkuldId;
+        ArrayList<String> resultat = new ArrayList<>();
+        resultat = sql.query(SQL);
+
+        return resultat;
+    }
+
+    public ArrayList getSkuldWithLonId(int lonId) {
+        String SQL = "SELECT * FROM skuld WHERE lonId=" + lonId;
+        ArrayList<String> resultat = new ArrayList<>();
+        resultat = sql.query(SQL);
+
+        return resultat;
+    }
+
+    public ArrayList getSkuldWithPnr(int pnr) {
+        String SQL = "SELECT * FROM skuld WHERE pnr=" + pnr;
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
 
@@ -155,14 +176,6 @@ public class Logik {
         return numberOfChanges;
     }
 
-    public ArrayList getSkuld(int SkuldId) {
-        String SQL = "SELECT * FROM skuld WHERE skuldId=" + SkuldId;
-        ArrayList<String> resultat = new ArrayList<>();
-        resultat = sql.query(SQL);
-
-        return resultat;
-    }
-
     //lån
     //lån
     //lån
@@ -174,13 +187,30 @@ public class Logik {
         return resultat;
     }
 
-    public ArrayList listLonBok() {
-        String SQL = "SELECT lon.lonId,"
-                + " lon.pnr,"
-                + " litteratur.titel,"
-                + " litteratur.id AS litteraturId FROM lon "
-                + "JOIN lonLitteratur ON lon.lonId=lonLitteratur.lonId "
-                + "JOIN litteratur ON litteratur.id=lonLitteratur.lonId";
+    public ArrayList getLon(int lonId) {
+        String SQL = "SELECT * FROM lon WHERE lonId=" + lonId;
+        ArrayList<String> resultat = new ArrayList<>();
+        resultat = sql.query(SQL);
+
+        return resultat;
+    }
+
+    public ArrayList getLonWithLittId(int littId) {
+        String SQL = "SELECT lonId FROM lonLitteratur WHERE litterturId=" + littId;
+        ArrayList<String> lonIdList = new ArrayList<>();
+        lonIdList = sql.query(SQL);
+
+        ArrayList<String> lonList = new ArrayList<>();
+        for (int i = 1; i < lonIdList.size(); i++) {
+            int lonId = Integer.parseInt(lonIdList.get(i));
+            getLon(lonId).get(1);
+        }
+
+        return lonList;
+    }
+
+    public ArrayList getLonWithPnr(int pnr) {
+        String SQL = "SELECT * FROM lon WHERE pnr=" + pnr;
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
 
@@ -218,14 +248,9 @@ public class Logik {
         return numberOfChanges;
     }
 
-    public ArrayList getLon(int lonId) {
-        String SQL = "SELECT * FROM lon WHERE lonId=" + lonId;
-        ArrayList<String> resultat = new ArrayList<>();
-        resultat = sql.query(SQL);
-
-        return resultat;
-    }
-
+    //lån och vilken litteratur som hör till
+    //lån och vilken litteratur som hör till
+    //lån och vilken litteratur som hör till
     public ArrayList getLonLitteratur(int littId) {
         String SQL = "SELECT * FROM lonLitteratur WHERE litterturId=" + littId;
         ArrayList<String> resultat = new ArrayList<>();
@@ -233,7 +258,7 @@ public class Logik {
 
         return resultat;
     }
-    
+
     public ArrayList getLonLitteraturWithLonId(int lonId) {
         String SQL = "SELECT * FROM lonLitteratur WHERE lonId=" + lonId;
         ArrayList<String> resultat = new ArrayList<>();
@@ -242,121 +267,18 @@ public class Logik {
         return resultat;
     }
 
-    public ArrayList getLonWithLittId(int littId) {
-        String SQL = "SELECT lonId FROM lonLitteratur WHERE litterturId=" + littId;
-        ArrayList<String> lonIdList = new ArrayList<>();
-        lonIdList = sql.query(SQL);
-
-        ArrayList<String> lonList = new ArrayList<>();
-        for (int i = 1; i < lonIdList.size(); i++) {
-            int lonId = Integer.parseInt(lonIdList.get(i));
-            getLon(lonId).get(1);
-        }
-
-        return lonList;
-    }
-
-    public ArrayList getLonWithPnr(int pnr) {
-        String SQL = "SELECT * FROM lon WHERE pnr=" + pnr;
+    public ArrayList listLonBok() {
+        String SQL = "SELECT lon.lonId,"
+                + " lon.pnr,"
+                + " litteratur.titel,"
+                + " litteratur.id AS litteraturId FROM lon "
+                + "JOIN lonLitteratur ON lon.lonId=lonLitteratur.lonId "
+                + "JOIN litteratur ON litteratur.id=lonLitteratur.lonId";
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
 
         return resultat;
     }
 
-    public ArrayList getSkuldWithLonId(int lonId) {
-        String SQL = "SELECT * FROM skuld WHERE lonId=" + lonId;
-        ArrayList<String> resultat = new ArrayList<>();
-        resultat = sql.query(SQL);
 
-        return resultat;
-    }
-
-    public ArrayList getSkuldWithPnr(int pnr) {
-        String SQL = "SELECT * FROM skuld WHERE pnr=" + pnr;
-        ArrayList<String> resultat = new ArrayList<>();
-        resultat = sql.query(SQL);
-
-        return resultat;
-    }
-
-    //text strängar till olika objekt
-    public Person rowToPerson(String row) {
-        String[] rowArray;
-        rowArray = row.split(" ");
-        int pnr = Integer.parseInt(rowArray[0]);
-        String eNamn = rowArray[1];
-        String fNamn = rowArray[2];
-        String teleNr = rowArray[3];
-        String epost = rowArray[4];
-        int roll = Integer.parseInt(rowArray[5]);
-        if (roll == 1) {
-            Anstalld a = new Anstalld(pnr,
-                    eNamn,
-                    fNamn,
-                    teleNr,
-                    epost);
-            return a;
-
-        } else {
-            Kund k = new Kund(pnr,
-                    fNamn,
-                    eNamn,
-                    teleNr,
-                    epost);
-            return k;
-        }
-    }
-
-    public Skuld rowToSkuld(String row) {
-        String[] rowArray;
-        rowArray = row.split(" ");
-        int skuldId = Integer.parseInt(rowArray[0]);
-        int lonId = Integer.parseInt(rowArray[1]);
-        int pnr = Integer.parseInt(rowArray[2]);
-        int belopp = Integer.parseInt(rowArray[3]);
-        String slutDatum = rowArray[4];
-        Skuld s = new Skuld(
-                skuldId,
-                lonId,
-                belopp,
-                slutDatum,
-                pnr);
-        return s;
-    }
-
-    public Lon rowToLon(String row) {
-        String[] rowArray;
-        rowArray = row.split(" ");
-        int lonId = Integer.parseInt(rowArray[0]);
-        int pnr = Integer.parseInt(rowArray[1]);
-        String slutDatum = rowArray[2];
-        Lon l = new Lon(
-                lonId,
-                pnr,
-                slutDatum);
-        return l;
-    }
-
-    public Litteratur rowToLitt(String row) {
-        String[] rowArray;
-        rowArray = row.split(" ");
-        int id = Integer.parseInt(rowArray[0]);
-        String titel = rowArray[1];
-        String forfattare = rowArray[2];
-        String sprak = rowArray[3];
-        int utgivningsar = Integer.parseInt(rowArray[4]);
-        boolean tillganglig = Boolean.parseBoolean(rowArray[5]);
-        boolean kopieringsbart = Boolean.parseBoolean(rowArray[6]);
-        String isbn = rowArray[7];
-        Litteratur l = new Litteratur(id,
-                titel,
-                forfattare,
-                sprak,
-                utgivningsar,
-                tillganglig,
-                kopieringsbart,
-                isbn);
-        return l;
-    }
 }
