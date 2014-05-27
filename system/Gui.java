@@ -143,7 +143,7 @@ public class Gui extends javax.swing.JFrame {
         SkuldH_jButton_HamtaInfo = new javax.swing.JButton();
         SkuldH_jTextField_HamtaInfo = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
-        jButton18 = new javax.swing.JButton();
+        SkuldH_jTextField_Execute = new javax.swing.JButton();
         SkuldH_jTextField_SDatum = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
         SkuldH_jRadioButton_Edit = new javax.swing.JRadioButton();
@@ -632,6 +632,45 @@ public class Gui extends javax.swing.JFrame {
         LanH_jButton_SokButt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LanH_jButton_SokButtActionPerformed(evt);
+                
+                ArrayList<String> lonData = new ArrayList<>();
+                ArrayList<String> lonData2 = new ArrayList<>();
+                ArrayList<String> bokData = new ArrayList<>();
+                
+                lonData = logik.getLon(Integer.parseInt(LanH_jTextField_Sokfield.getText()));
+                lonData2 = logik.getLonLitteraturWithLonId(Integer.parseInt(LanH_jTextField_Sokfield.getText()));
+                
+                for(int i = 0; i < LanH_jTable_Tabell.getRowCount(); i++){
+                	for(int x = 0; x < LanH_jTable_Tabell.getColumnCount(); x++){
+                		LanH_jTable_Tabell.setValueAt("", i, x);
+                	}
+                }	
+            	
+            	String[] lonDataSplit = new String[LanH_jTable_Tabell.getColumnCount()];
+            	String[] lonDataSplit2 = new String[LanH_jTable_Tabell.getColumnCount()];
+            	String[] bokDataSplit = new String[LanH_jTable_Tabell.getColumnCount()];
+            	String[][] getLon = new String[LanH_jTable_Tabell.getRowCount()][LanH_jTable_Tabell.getColumnCount()];
+            	
+            	for(int i = 0; i < lonData.size(); i++){
+            		lonDataSplit = lonData.get(i).split(" ");
+            		lonDataSplit2 = lonData2.get(i).split(" ");
+            		getLon[i][0] = lonDataSplit[0];
+            		getLon[i][1] = lonDataSplit[1];
+            		
+            		getLon[i][2] = "titel";
+            		if(i != 0){
+                		bokData = logik.getLittId(Integer.parseInt(lonDataSplit2[0]));
+                		bokDataSplit = bokData.get(i).split(" ");
+                		getLon[i][2] = bokDataSplit[2];
+            		}
+            		
+            		getLon[i][3] = lonDataSplit2[0];
+
+            		
+            		for(int x = 0; x < LanH_jTable_Tabell.getColumnCount(); x++){
+            			LanH_jTable_Tabell.setValueAt(getLon[i][x], i, x);
+            		}
+            	}
             }
         });
 
@@ -686,9 +725,7 @@ public class Gui extends javax.swing.JFrame {
                 }	
             	
             	ArrayList<String> lon = new ArrayList<>();
-            	System.out.println(lon.size());
             	lon = logik.listLonBok();
-            	System.out.println(lon.size());
             	String[] lonData = new String[LanH_jTable_Tabell.getColumnCount()];
             	String[][] getLon = new String[LanH_jTable_Tabell.getRowCount()][LanH_jTable_Tabell.getColumnCount()];
             	for(int i = 0; i < lon.size(); i++){
@@ -735,12 +772,15 @@ public class Gui extends javax.swing.JFrame {
         LanH_jButton_Exekvera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	LanH_jButton_ExekveraActionPerformed(evt);
+            	if(LanH_jRadioButton_Add.isSelected()==true){
             		ArrayList<Integer> bokId = new ArrayList<>();
             		bokId.add(Integer.parseInt(LanH_jTextField_BokID.getText()));
             		Lon lon = new Lon(Integer.parseInt(LanH_jTextField_LanID.getText()), bokId,Integer.parseInt(LanH_jTextField_PrsnNr.getText()), 
             				LanH_jTextField_Slutdatum.getText());
             		
             		logik.regLon(lon);
+            	}
+
             	
             }
         });
@@ -1158,14 +1198,14 @@ public class Gui extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	 BokH_jButton_ExekveraActionPerformed(evt);
             	 
-            	 
-            	 Litteratur litteratur = new Litteratur(Integer.parseInt(BokH_jTextField_ID.getText()), BokH_jTextField_Titel.getText().replace(" ", "."), 
-            			 BokH_jTextField_Forfattare.getText().replace(" ", "."), BokH_jTextField_Sprak.getText(),
-            			 Integer.parseInt(BokH_jTextField_UtgivAr.getText()), Boolean.parseBoolean(BokH_jTextField_Tillgang.getText()),
-            			 Boolean.parseBoolean(BokH_jTextField_KopB.getText()), BokH_jTextField_ISBN.getText());
-            	 
-            	 logik.regLitt(litteratur);
-            	 
+            	 if(BokH_jRadioButton_Add.isSelected()==true){
+	            	 Litteratur litteratur = new Litteratur(Integer.parseInt(BokH_jTextField_ID.getText()), BokH_jTextField_Titel.getText().replace(" ", "."), 
+	            			 BokH_jTextField_Forfattare.getText().replace(" ", "."), BokH_jTextField_Sprak.getText(),
+	            			 Integer.parseInt(BokH_jTextField_UtgivAr.getText()), Boolean.parseBoolean(BokH_jTextField_Tillgang.getText()),
+	            			 Boolean.parseBoolean(BokH_jTextField_KopB.getText()), BokH_jTextField_ISBN.getText());
+	            	 
+	            	 logik.regLitt(litteratur);
+            	 }
             }
         });
 
@@ -1260,7 +1300,7 @@ public class Gui extends javax.swing.JFrame {
                 }
                 
                 ArrayList<String> bokData = new ArrayList<>();
-                bokData = logik.getLitt(BokH_jTextField_SokField.getText().replace(" ", "."));
+                bokData = logik.getLittTitel(BokH_jTextField_SokField.getText().replace(" ", "."));
             	String[] bokDataSplit = new String[BokH_jTable_Tabell.getColumnCount()];
             	String[][] getPersons = new String[BokH_jTable_Tabell.getRowCount()][BokH_jTable_Tabell.getColumnCount()];
             	for(int i = 0; i < bokData.size(); i++){
@@ -1436,20 +1476,49 @@ public class Gui extends javax.swing.JFrame {
 
         jLabel30.setText("Sortera information");
 
-        SkuldH_jComboBox_SortInfo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SkuldID", "LÃ¥nID", "PersNr", "SlutDatum", "Belopp" }));
+        SkuldH_jComboBox_SortInfo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SkuldID", "LånID", "PersNr", "SlutDatum", "Belopp" }));
 
-        SkuldH_jButton_SortInfo.setText("HÃ¤mta Info");
-
+        SkuldH_jButton_SortInfo.setText("Hämta Info");
+        
+        SkuldH_jButton_SortInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	SkuldH_jButton_SortInfoActionPerformed(evt);
+            	
+             	ArrayList<String> skuld = new ArrayList<>();
+             	skuld = logik.listSkuld();
+             	String[] skuldData = new String[SkuldH_jTable_Tabell.getColumnCount()];
+             	String[][] getSkuld = new String[SkuldH_jTable_Tabell.getRowCount()][SkuldH_jTable_Tabell.getColumnCount()];
+             	for(int i = 0; i < skuld.size(); i++){
+             		skuldData = skuld.get(i).split(" ");
+             		
+             		for(int x = 0; x < SkuldH_jTable_Tabell.getColumnCount();x++){
+             			getSkuld[i][x] = skuldData[x].replace(".", " ");
+             		}
+             		
+             		for(int x = 0; x < SkuldH_jTable_Tabell.getColumnCount(); x++){
+             			SkuldH_jTable_Tabell.setValueAt(getSkuld[i][x], i, x);
+             		}
+             	}
+            }
+        });
+        
         jLabel31.setText("Rensa tabell");
 
-        SkuldH_jButton_Rens.setText("UtfÃ¶r Rensning");
+        SkuldH_jButton_Rens.setText("Utför Rensning");
         SkuldH_jButton_Rens.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SkuldH_jButton_RensActionPerformed(evt);
+                
+                for(int i = 0; i < SkuldH_jTable_Tabell.getRowCount(); i++){
+                	for(int x = 0; x < SkuldH_jTable_Tabell.getColumnCount(); x++){
+                		SkuldH_jTable_Tabell.setValueAt("", i, x);
+                	}
+                }
+                
             }
         });
 
-        jLabel32.setText("SÃ¶kfunktion");
+        jLabel32.setText("Sökfunktion");
 
         SkuldH_jTextField_SokField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1457,10 +1526,32 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
-        SkuldH_jButton_SokButt.setText("SÃ¶k");
+        SkuldH_jButton_SokButt.setText("Sök");
         SkuldH_jButton_SokButt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SkuldH_jButton_SokButtActionPerformed(evt);
+                
+                for(int i = 0; i < SkuldH_jTable_Tabell.getRowCount(); i++){
+                	for(int x = 0; x < SkuldH_jTable_Tabell.getColumnCount(); x++){
+                		SkuldH_jTable_Tabell.setValueAt("", i, x);
+                	}
+                }
+                
+             	ArrayList<String> skuld = new ArrayList<>();
+             	skuld = logik.getSkuld(Integer.parseInt(SkuldH_jTextField_SokField.getText()));
+             	String[] skuldData = new String[SkuldH_jTable_Tabell.getColumnCount()];
+             	String[][] getSkuld = new String[SkuldH_jTable_Tabell.getRowCount()][SkuldH_jTable_Tabell.getColumnCount()];
+             	for(int i = 0; i < skuld.size(); i++){
+             		skuldData = skuld.get(i).split(" ");
+             		
+             		for(int x = 0; x < SkuldH_jTable_Tabell.getColumnCount();x++){
+             			getSkuld[i][x] = skuldData[x].replace(".", " ");
+             		}
+             		
+             		for(int x = 0; x < SkuldH_jTable_Tabell.getColumnCount(); x++){
+             			SkuldH_jTable_Tabell.setValueAt(getSkuld[i][x], i, x);
+             		}
+             	}
             }
         });
 
@@ -1470,10 +1561,20 @@ public class Gui extends javax.swing.JFrame {
         SkuldH_jTextField_RaderaSkuld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SkuldH_jTextField_RaderaSkuldActionPerformed(evt);
+              
             }
         });
 
         SkuldH_jButton_RaderaSkuld.setText("Ta bort");
+        
+        SkuldH_jButton_RaderaSkuld.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	 SkuldH_jButton_RaderaSkuldActionPerformed(evt);
+                
+                 logik.delSkuld(Integer.parseInt(SkuldH_jTextField_RaderaSkuld.getText()));
+            	 
+            }
+        });
 
         SkuldH_jTable_Tabell.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1586,13 +1687,35 @@ public class Gui extends javax.swing.JFrame {
         jScrollPane4.setViewportView(SkuldH_jTable_Tabell);
         SkuldH_jTable_Tabell.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        SkuldH_jButton_HamtaInfo.setText("Fyll fÃ¤lt");
+        SkuldH_jButton_HamtaInfo.setText("Fyll fält");
+        
+        SkuldH_jButton_HamtaInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	SkuldH_jButton_HamtaInfoActionPerformed(evt);
+            	
+            }
+        });
 
         SkuldH_jTextField_HamtaInfo.setText("Skriv in ID");
 
-        jLabel34.setText("HÃ¤mta information");
+        jLabel34.setText("Hämta information");
 
-        jButton18.setText("Exekvera");
+        SkuldH_jTextField_Execute.setText("Exekvera");
+        
+        SkuldH_jTextField_Execute.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	SkuldH_jTextField_ExecuteActionPerformed(evt);
+            	if(SkuldH_jRadioButton_Add.isSelected() == true){
+                    Skuld skuld = new Skuld(Integer.parseInt(SkuldH_jTextField_SkuldID.getText()), Integer.parseInt(SkuldH_jTextField_LanID.getText()), 
+                    		Integer.parseInt(SkuldH_jTextField_Belopp.getText()), SkuldH_jTextField_SDatum.getText(), Integer.parseInt(SkuldH_jTextField_PersNum.getText()));
+                    
+                    logik.regSkuld(skuld);
+            	}
+
+            }
+        });
+        
+
 
         SkuldH_jTextField_SDatum.setText("SDatum");
 
@@ -1604,6 +1727,7 @@ public class Gui extends javax.swing.JFrame {
         SkuldH_jRadioButton_Add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SkuldH_jRadioButton_AddActionPerformed(evt);
+                
             }
         });
         
@@ -1621,11 +1745,11 @@ public class Gui extends javax.swing.JFrame {
 
         jLabel36.setText("Skuld ID");
 
-        jLabel37.setText("LÃ¤gg till eller Ã¤ndra Skuld");
+        jLabel37.setText("Lägg till eller Ändra Skuld");
 
-        jLabel38.setText("LÃ¥n ID");
+        jLabel38.setText("Lån ID");
 
-        SkuldH_jTextField_LanID.setText("LÃ¥nID");
+        SkuldH_jTextField_LanID.setText("LånID");
         SkuldH_jTextField_LanID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SkuldH_jTextField_LanIDActionPerformed(evt);
@@ -1705,7 +1829,7 @@ public class Gui extends javax.swing.JFrame {
                                             .addComponent(jLabel42)
                                             .addComponent(SkuldH_jTextField_PersNum, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(SkuldH_jTextField_Belopp, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jButton18))))
+                            .addComponent(SkuldH_jTextField_Execute))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -1775,7 +1899,7 @@ public class Gui extends javax.swing.JFrame {
                             .addComponent(SkuldH_jRadioButton_Edit)
                             .addComponent(SkuldH_jTextField_Belopp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton18)))
+                        .addComponent(SkuldH_jTextField_Execute)))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
 
@@ -1812,7 +1936,17 @@ public class Gui extends javax.swing.JFrame {
     
     
     
+    private void SkuldH_jButton_SortInfoActionPerformed(java.awt.event.ActionEvent evt) {
+    }
     
+    private void SkuldH_jButton_HamtaInfoActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+    
+    private void SkuldH_jButton_RaderaSkuldActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+    
+    private void SkuldH_jTextField_ExecuteActionPerformed(java.awt.event.ActionEvent evt) {
+    }
     
     private void LanH_jButton_RaderaLanButtActionPerformed(java.awt.event.ActionEvent evt) {
     }
@@ -2041,7 +2175,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JTextField SkuldH_jTextField_SDatum;
     private javax.swing.JTextField SkuldH_jTextField_SkuldID;
     private javax.swing.JTextField SkuldH_jTextField_SokField;
-    private javax.swing.JButton jButton18;
+    private javax.swing.JButton SkuldH_jTextField_Execute;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2101,3 +2235,4 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JTable BokH_jTable_Tabell;
     private javax.swing.JTable SkuldH_jTable_Tabell;
 }
+
