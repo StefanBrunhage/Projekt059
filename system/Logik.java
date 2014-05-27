@@ -1,11 +1,11 @@
-package System;
+package system;
 
 import java.util.ArrayList;
 
 /**
- *
- * @author Projekt059
- */
+*
+* @author Projekt059
+*/
 public class Logik {
 
     Sql sql = new Sql();
@@ -220,6 +220,14 @@ public class Logik {
 
     public ArrayList getLonLitteratur(int littId) {
         String SQL = "SELECT * FROM lonLitteratur WHERE litterturId=" + littId;
+        ArrayList<String> resultat = new ArrayList<>();
+        resultat = sql.query(SQL);
+
+        return resultat;
+    }
+    
+    public ArrayList getLonLitteraturWithLonId(int lonId) {
+        String SQL = "SELECT * FROM lonLitteratur WHERE lonId=" + lonId;
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
 
