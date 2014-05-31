@@ -273,7 +273,7 @@ public class Logik {
                 + " litteratur.titel,"
                 + " litteratur.id AS litteraturId FROM lon "
                 + "JOIN lonLitteratur ON lon.lonId=lonLitteratur.lonId "
-                + "JOIN litteratur ON litteratur.id=lonLitteratur.lonId";
+                + "JOIN litteratur ON litteratur.id=lonLitteratur.litterturId";
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
 
