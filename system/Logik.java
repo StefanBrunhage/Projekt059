@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Logik {
 
     Sql sql = new Sql();
+
     //litteratur
     //litteratur
     //litteratur
@@ -53,14 +54,16 @@ public class Logik {
         int numberOfChanges = 0;
 
         lonList = getLonWithLittId(littId);
-        for (int i = 1; 1 < lonList.size(); i++) {
+        
+        for (int i = 1; i < lonList.size(); i++) {
             Lon l = ObjektSkapare.rowToLon(lonList.get(1));
             String SQL2 = "DELETE FROM skuld WHERE lonId=" + l.getLonId();
             numberOfChanges = numberOfChanges + sql.update(SQL2);
             String SQL3 = "DELETE FROM lon WHERE lonId=" + l.getLonId();
+            numberOfChanges = numberOfChanges + sql.update(SQL3);
         }
 
-        String SQL = "DELETE FROM litteratur WHERE lonId=" + littId;
+        String SQL = "DELETE FROM litteratur WHERE id=" + littId;
 
         numberOfChanges = numberOfChanges + sql.update(SQL);
 
@@ -106,13 +109,13 @@ public class Logik {
         ArrayList<String> lonList = new ArrayList<>();
         int numberOfChanges = 0;
         lonList = getLonWithPnr(pnr);
-
         for (int i = 1; i < lonList.size(); i++) {
             Lon l = ObjektSkapare.rowToLon(lonList.get(i));
             String SQL2 = "DELETE FROM skuld WHERE lonId=" + l.getLonId();
             numberOfChanges = numberOfChanges + sql.update(SQL2);
             String SQL3 = "DELETE FROM lon WHERE lonId=" + l.getLonId();
             numberOfChanges = numberOfChanges + sql.update(SQL3);
+
         }
 
         String SQL = "DELETE FROM person WHERE pnr=" + pnr;
@@ -191,7 +194,6 @@ public class Logik {
         String SQL = "SELECT * FROM lon WHERE lonId=" + lonId;
         ArrayList<String> resultat = new ArrayList<>();
         resultat = sql.query(SQL);
-
         return resultat;
     }
 
@@ -201,10 +203,8 @@ public class Logik {
         lonIdList = sql.query(SQL);
 
         ArrayList<String> lonList = new ArrayList<>();
-        for (int i = 1; i < lonIdList.size(); i++) {
-            int lonId = Integer.parseInt(lonIdList.get(i));
-            getLon(lonId).get(1);
-        }
+        int lonId = Integer.parseInt(lonIdList.get(1));
+        lonList = getLon(lonId);
 
         return lonList;
     }
@@ -279,6 +279,5 @@ public class Logik {
 
         return resultat;
     }
-
 
 }
